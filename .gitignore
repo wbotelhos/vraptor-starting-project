@@ -1,0 +1,9 @@
+build
+classes
+dist
+WebContent/WEB-INF/classes
+
+.DS_Store
+
+*.class
+*.war

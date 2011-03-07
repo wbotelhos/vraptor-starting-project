@@ -1,0 +1,31 @@
+/**
+ *
+ * VRaptor Blank Project
+ *
+ * @what     VRaptor blank project ready for use.
+ * @when     07/03/11
+ * @contact  @wbotelhos
+ * @articles http://wbotelhos.com.br
+ * @github   http://github.com/wbotelhos/vraptor-blank-project
+ *
+ * @project:
+ *
+ * C3P0;
+ * Classes Genéricas (Generics);
+ * Herança;
+ * Hibernate 3.6.1;
+ * I18N (BR US);
+ * JPA 2;
+ * jQuery;
+ * jQuery UI;
+ * JSTL;
+ * Mockito;
+ * MySQL;
+ * Prelude;
+ * Sitemesh;
+ * Spring 3 (Container);
+ * Tomcat;
+ * Voltado à Interface (Repository);
+ * VRaptor 3.3.1.
+ *
+ */
