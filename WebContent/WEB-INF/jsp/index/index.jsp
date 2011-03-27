@@ -1,5 +1,5 @@
 <head>
-	<title>VRaptor | Blank Project [${sessionScope.language == '' ? 'BR' : sessionScope.language}]</title>
+	<title>VRaptor | Blank Project [${empty sessionScope.language ? 'BR' : sessionScope.language}]</title>
 </head>
 
 <body>
@@ -9,23 +9,31 @@
 
 	<fmt:message key="projeto" />:<br/><br/>
 
-	- C3P0;<br/>
-	- Classes Genéricas (Generics);<br/>
-	- Herança;<br/>
-	- Hibernate 3.6.1;<br/>
-	- I18N (BR - US);<br/>
-	- JPA 2;<br/>
-	- jQuery;<br/>
+	- Annotation;<br/>
+	- Component;<br/>
+	- CRUD;<br/>
+	- CSS;<br/>
+	- Dependency Injection;<br/>
+	- Eclipse;<br/>
+	- ENUM;<br/>
+	- Generic Class;<br/>
+	- Interceptor;<br/>
+	- Internacionalization (I18N);<br/> 
+	- JPA/Hibernate;<br/>
 	- jQuery UI;<br/>
-	- JSTL;<br/>
-	- Mockito;<br/>
+	- jQuery;<br/>
+	- JSP;<br/>
+	- Log4j;<br/>
+	- Login Control;<br/>
+	- MVC;<br/>
 	- MySQL;<br/>
+	- Permission Control;<br/>
+	- POJO;<br/>
 	- Prelude;<br/>
-	- Sitemesh;<br/>
-	- Spring 3 (Container);<br/>
-	- Tomcat;<br/>
-	- Voltado à Interface (Repository);<br/>
-	- VRaptor 3.3.1.<br/><br/>
+	- Repository;<br/>
+	- REST;<br/>
+	- VRaptor 3;<br/>
+	- XHTML;<br/><br/>
 
 	<fmt:message key="artigosEm" />: <a href="http://www.wbotelhos.com.br/" target="_blank">wbotelhos.com.br</a>
 </body>
