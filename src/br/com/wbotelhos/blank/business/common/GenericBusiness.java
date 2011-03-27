@@ -23,47 +23,25 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements Gener
 		this.clazz = clazz;
 	}
 
-	public Collection<T> loadAll() throws Exception {
-		try {
-			Query query = manager.createQuery("from " + clazz.getName());
+	public Collection<T> loadAll() {
+		Query query = manager.createQuery("from " + clazz.getName());
 
-			@SuppressWarnings("unchecked")
-			Collection<T> resultList = query.getResultList();
+		@SuppressWarnings("unchecked")
+		Collection<T> resultList = query.getResultList();
 
-			return resultList;
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("Não foi possível listar os registros.", e);
-		}
+		return resultList;
 	}
 
-	public T loadById(Long id) throws Exception {
-		try {
-			return manager.find(clazz, id);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("Não foi possível carregar o registro.", e);
-		}
+	public T loadById(Long id) {
+		return manager.find(clazz, id);
 	}
 
-	public void remove(T entity) throws Exception {
-		try {
-			manager.remove(manager.find(clazz, entity.getId()));
-		} catch (Exception e) {
-			e.printStackTrace();
-			manager.getTransaction().rollback();
-			throw new Exception("Não foi possível remover o registro.", e);
-		}
+	public void remove(T entity) {
+		manager.remove(manager.find(clazz, entity.getId()));
 	}
 
-	public T save(T entity) throws Exception {
-		try {
-			return manager.merge(entity);
-		} catch (Exception e) {
-			e.printStackTrace();
-			manager.getTransaction().rollback();
-			throw new Exception("Não foi possível inserir o registro.", e);
-		}
+	public T save(T entity) {
+		return manager.merge(entity);
 	}
 
 }
