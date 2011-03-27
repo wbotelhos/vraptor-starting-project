@@ -2,30 +2,42 @@
  *
  * VRaptor Blank Project
  *
- * @what     VRaptor blank project ready for use.
- * @when     07/03/11
- * @contact  @wbotelhos
- * @articles http://wbotelhos.com.br
- * @github   http://github.com/wbotelhos/vraptor-blank-project
+ * @what       VRaptor blank project ready for use.
+ * @author     @wbotelhos
  *
- * @project:
+ * @blog       http://wbotelhos.com.br
+ * @project    http://github.com/wbotelhos/vraptor-blank-project
  *
- * C3P0;
- * Classes Genéricas (Generics);
- * Herança;
- * Hibernate 3.6.1;
- * I18N (BR US);
- * JPA 2;
- * jQuery;
+ * @vraptor
+ *   @site     http://vraptor.caelum.com.br
+ *   @source   http://github.com/caelum/vraptor
+ *
+ * @keywords
+ * 
+ * Annotation;
+ * Component;
+ * CRUD;
+ * CSS;
+ * Dependency Injection;
+ * Eclipse;
+ * ENUM;
+ * Generic Class;
+ * Interceptor;
+ * Internacionalization (I18N); 
+ * JPA/Hibernate;
  * jQuery UI;
- * JSTL;
- * Mockito;
+ * jQuery;
+ * JSP;
+ * Log4j;
+ * Login Control;
+ * MVC;
  * MySQL;
+ * Permission Control;
+ * POJO;
  * Prelude;
- * Sitemesh;
- * Spring 3 (Container);
- * Tomcat;
- * Voltado à Interface (Repository);
- * VRaptor 3.3.1.
+ * Repository;
+ * REST;
+ * VRaptor 3;
+ * XHTML;
  *
  */
