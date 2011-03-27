@@ -6,12 +6,12 @@ import br.com.wbotelhos.blank.model.common.AbstractEntity;
 
 public interface GenericRepository<T extends AbstractEntity> {
 
-	Collection<T> loadAll() throws Exception;
+	Collection<T> loadAll();
 
-	T loadById(Long id) throws Exception;
+	T loadById(Long id);
 
-	void remove(T entity) throws Exception;
+	void remove(T entity);
 
-	T save(T entity) throws Exception;
+	T save(T entity);
 
 }
