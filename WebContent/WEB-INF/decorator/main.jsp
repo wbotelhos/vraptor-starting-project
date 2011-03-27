@@ -21,19 +21,19 @@
 	</head>
 	<body>
 		<c:if test="${not empty errors}">
-			<div id="error">
+			<div id="errors" class="error">
 				<c:forEach var="error" items="${errors}">
 			  		${error.category} - ${error.message}<br/>
 				</c:forEach>
 			</div>
 		</c:if>
 
+		<c:if test="${not empty error}">
+			<div id="error" class="error ui-state-error ui-corner-all">${error}</div>
+		</c:if>
+
 		<c:if test="${not empty message}">
-			<div id="message">
-				<c:if test="${not empty message}">
-					${message}<br/><br/>
-				</c:if>
-			</div>
+			<div id="message" class="message">${message}</div>
 		</c:if>
 
 		<decorator:body/>
