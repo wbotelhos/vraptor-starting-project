@@ -27,57 +27,39 @@ public class UsuarioController {
 
 	@Put("/usuario")
 	public void editar(Usuario entity) {
-		try {
-			result
-			.include("entity", repository.loadById(entity.getId()))
-			.forwardTo(this).novo();
-		} catch (Exception e) {
-			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
-		}
+		entity = repository.loadById(entity.getId());
+
+		result.include("usuario", entity).forwardTo(this).novo();
 	}
 
 	@Get("/usuario/{entity.id}")
 	public void exibir(Usuario entity) {
-		try {
-			result.include("entity", repository.loadById(entity.getId()));
-		} catch (Exception e) {
-			result.include("error", e.getMessage());
-		}
+		entity = repository.loadById(entity.getId());
+
+		result.include("usuario", entity);
 	}
 
 	@Get("/usuario")
 	public void listagem() {
-		try {
-			result.include("entityList", repository.loadAll());
-		} catch (Exception e) {
-			result.include("error", e.getMessage()).redirectTo(IndexController.class).index();
-		}
+		result.include("entityList", repository.loadAll());
 	}
 
 	@Delete("/usuario")
 	public void remover(Usuario entity) {
-		try {
-			repository.remove(entity);
+		repository.remove(entity);
 
-			result
-			.include("message", "Usu‡rio removido com sucesso!")
-			.redirectTo(this).listagem();
-		} catch (Exception e) {
-			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
-		}
+		result
+		.include("message", "Usu‡rio removido com sucesso!")
+		.redirectTo(this).listagem();
 	}
 
 	@Post("/usuario")
 	public void salvar(Usuario entity) {
-		try {
-			entity = repository.save(entity);
+		entity = repository.save(entity);
 
-			result
-			.include("message", "Usu‡rio salvo com sucesso!")
-			.redirectTo(this).exibir(entity);
-		} catch (Exception e) {
-			result.include("error", e.getMessage());
-		}
+		result
+		.include("message", "Usu‡rio salvo com sucesso!")
+		.redirectTo(this).exibir(entity);
 	}
 
 }
