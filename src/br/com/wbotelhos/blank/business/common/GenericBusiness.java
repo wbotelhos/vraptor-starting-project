@@ -37,7 +37,7 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements Gener
 	}
 
 	public void remove(T entity) {
-		manager.remove(manager.find(clazz, entity.getId()));
+		manager.remove(manager.getReference(clazz, entity.getId()));
 	}
 
 	public T save(T entity) {
