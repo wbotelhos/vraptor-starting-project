@@ -43,6 +43,11 @@ public class UsuarioController {
 		result.include("entityList", repository.loadAll());
 	}
 
+	@Get("/negado")
+	public void negado() {
+		
+	}
+
 	@Delete("/usuario/{entity.id}")
 	public void remover(Usuario entity) {
 		repository.remove(entity);
