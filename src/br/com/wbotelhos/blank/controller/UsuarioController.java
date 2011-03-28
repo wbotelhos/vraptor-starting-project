@@ -3,7 +3,6 @@ package br.com.wbotelhos.blank.controller;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
-import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.wbotelhos.blank.model.Usuario;
@@ -25,18 +24,18 @@ public class UsuarioController {
 
 	}
 
-	@Put("/usuario")
+	@Get("/usuario/{entity.id}/editar")
 	public void editar(Usuario entity) {
 		entity = repository.loadById(entity.getId());
 
-		result.include("usuario", entity).forwardTo(this).novo();
+		result.include("entity", entity).forwardTo(this).novo();
 	}
 
-	@Get("/usuario/{entity.id}")
+	@Get({ "/usuario/{entity.id}", "/usuario/{entity.id}/exibir" })
 	public void exibir(Usuario entity) {
 		entity = repository.loadById(entity.getId());
 
-		result.include("usuario", entity);
+		result.include("entity", entity);
 	}
 
 	@Get("/usuario")
@@ -44,7 +43,7 @@ public class UsuarioController {
 		result.include("entityList", repository.loadAll());
 	}
 
-	@Delete("/usuario")
+	@Delete("/usuario/{entity.id}")
 	public void remover(Usuario entity) {
 		repository.remove(entity);
 

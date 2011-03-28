@@ -4,18 +4,15 @@
 
 <body>
 	<c:forEach items="${entityList}" var="entity">
-		 | ${entity.id} | ${entity.nome} | ${entity.email} | ${entity.senha} | 
+		ID:		${entity.id}
+		Nome:	${entity.nome}
+		E-mail:	${entity.email}
+		Senha:	${entity.senha} 
 
-		<form action="<c:url value='/usuario'/>" method="post">
-			<input type="hidden" name="_method" value="put"/>
-			<input type="hidden" name="entity.id" value="${entity.id}"/>
+		(<a href="<c:url value='/usuario/${entity.id}/editar'/>"><fmt:message key="editar"/></a>) 
 
-			<input type="submit" value="<fmt:message key="editar"/>"/>
-		</form> 
-
-		<form action="<c:url value='/usuario'/>" method="post">
+		<form action="<c:url value='/usuario/${entity.id}'/>" method="post">
 			<input type="hidden" name="_method" value="delete"/>
-			<input type="hidden" name="entity.id" value="${entity.id}"/>
 
 			<input type="submit" value="<fmt:message key="remover"/>"/>
 		</form><br/>
