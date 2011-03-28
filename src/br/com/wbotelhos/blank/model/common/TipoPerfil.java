@@ -2,6 +2,7 @@ package br.com.wbotelhos.blank.model.common;
 
 public enum TipoPerfil {
 
+	VISITANTE("Visitante"),
 	MEMBRO("Membro"),
 	MODERADOR("Moderador"),
 	ADMINISTRADOR("Administrador");
