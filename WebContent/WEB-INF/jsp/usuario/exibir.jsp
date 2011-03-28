@@ -7,6 +7,7 @@
 	Nome:	${entity.nome}
 	E-mail:	${entity.email}
 	Senha:	${entity.senha} 
+	Perfil:	${entity.perfil.label}
 
 	(<a href="<c:url value='/usuario/${entity.id}/editar'/>"><fmt:message key="editar"/></a> |
 	<a href="<c:url value='/usuario'/>"><fmt:message key="listagem"/></a>)
