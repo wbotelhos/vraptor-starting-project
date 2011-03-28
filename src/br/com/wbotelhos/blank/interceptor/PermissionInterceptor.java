@@ -9,12 +9,11 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.wbotelhos.blank.annotation.Permission;
 import br.com.wbotelhos.blank.component.UserSession;
-import br.com.wbotelhos.blank.controller.LoginController;
 import br.com.wbotelhos.blank.controller.UsuarioController;
 import br.com.wbotelhos.blank.model.Usuario;
 import br.com.wbotelhos.blank.model.common.TipoPerfil;
 
-@Intercepts(after = LoginInterceptor.class)
+@Intercepts
 public class PermissionInterceptor implements Interceptor {
 
 	private final Result result;
@@ -27,17 +26,17 @@ public class PermissionInterceptor implements Interceptor {
 
 	@SuppressWarnings("unchecked")
 	public boolean accepts(ResourceMethod method) {
-		return !Arrays.asList(LoginController.class).contains(method.getMethod().getDeclaringClass());
+		return Arrays.asList(UsuarioController.class).contains(method.getMethod().getDeclaringClass());
 	}
 
 	public void intercept(InterceptorStack stack, ResourceMethod method, Object resource) {
 		Permission controllerList = method.getResource().getType().getAnnotation(Permission.class);
 		Permission metodoList = method.getMethod().getAnnotation(Permission.class);
 
-		if (this.isAcesso(metodoList) && this.isAcesso(controllerList)) {
+		if (userSession.getUser() != null && this.isAcesso(metodoList) && this.isAcesso(controllerList)) {
 			stack.next(method, resource);
 		} else {
-			result.redirectTo(UsuarioController.class).negado();
+			result.notFound();
 		}
 	}
 
