@@ -50,7 +50,7 @@
 			$.ajaxSetup({
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				error: function() {
-					mensagem('<fmt:message key="erro"/>', '<fmt:message key="erroAjax"/>');
+					mensagem('<fmt:message key="erro"/>', '<fmt:message key="erro.ajax"/>');
 				}
 			});
 
