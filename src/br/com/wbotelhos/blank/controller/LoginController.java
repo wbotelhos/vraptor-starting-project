@@ -21,9 +21,9 @@ public class LoginController {
 		this.userSession = userSession;
 	}
 
-	@Post("/login")
-	public void login(Usuario usuario) {
-		Usuario user = loginBusiness.autenticar(usuario.getEmail(), usuario.getSenha());
+	@Post("/autenticar")
+	public void autenticar(Usuario entity) {
+		Usuario user = loginBusiness.autenticar(entity.getEmail(), entity.getSenha());
 
 		if (user != null) {
 			userSession.setUser(user);
