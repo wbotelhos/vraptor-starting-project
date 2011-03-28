@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.wbotelhos.blank.model.Usuario;
+import br.com.wbotelhos.blank.model.common.TipoPerfil;
 import br.com.wbotelhos.blank.repository.UsuarioRepository;
 
 @Resource
@@ -21,7 +22,7 @@ public class UsuarioController {
 
 	@Get("/usuario/novo")
 	public void novo() {
-
+		result.include("perfilList", TipoPerfil.values());
 	}
 
 	@Get("/usuario/{entity.id}/editar")
