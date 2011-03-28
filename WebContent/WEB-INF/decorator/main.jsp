@@ -17,9 +17,13 @@
 		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.11.js'/>"></script>
 
+		<script type="text/javascript" src="<c:url value='/js/javascript.js'/>" charset="utf-8"></script>
+
 		<title><decorator:title default="VRaptor | Blank Project"/></title>
 	</head>
 	<body>
+		<div id="mensagem"></div>
+
 		<c:if test="${not empty errors}">
 			<div id="errors" class="error">
 				<c:forEach var="error" items="${errors}">
