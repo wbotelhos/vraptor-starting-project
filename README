@@ -17,10 +17,10 @@
  * Annotation;
  * Component;
  * CRUD;
- * CSS;
  * Dependency Injection;
  * Eclipse;
  * ENUM;
+ * Expression Language (EL);
  * Generic Class;
  * Interceptor;
  * Internacionalization (I18N); 
@@ -29,7 +29,6 @@
  * jQuery;
  * JSP;
  * Log4j;
- * Login Control;
  * MVC;
  * MySQL;
  * Permission Control;
