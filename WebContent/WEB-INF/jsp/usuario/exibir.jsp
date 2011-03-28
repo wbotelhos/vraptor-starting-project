@@ -1,5 +1,5 @@
 <head>
-	<title>VRaptor | <fmt:message key="usuario"/> [<fmt:message key="exibir"/>]</title>
+	<title>VRaptor | Usu&aacute;rio [exibir]</title>
 </head>
 
 <body>
@@ -9,12 +9,12 @@
 	Senha:	${entity.senha} 
 	Perfil:	${entity.perfil.label}
 
-	(<a href="<c:url value='/usuario/${entity.id}/editar'/>"><fmt:message key="editar"/></a> |
-	<a href="<c:url value='/usuario'/>"><fmt:message key="listagem"/></a>)
+	(<a href="<c:url value='/usuario/${entity.id}/editar'/>">Editar</a> |
+	<a href="<c:url value='/usuario'/>">Listagem</a>)
 
 	<form action="<c:url value='/usuario/${entity.id}'/>" method="post">
 		<input type="hidden" name="_method" value="delete"/>
 
-		<input type="submit" value="<fmt:message key="remover"/>"/>
+		<input type="submit" value="Remover"/>
 	</form>
 </body>
