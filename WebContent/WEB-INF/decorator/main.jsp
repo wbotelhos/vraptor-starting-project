@@ -33,7 +33,7 @@
 		</c:if>
 
 		<c:if test="${not empty error}">
-			<div id="error" class="error ui-state-error ui-corner-all">${error}</div>
+			<div id="error" class="error">${error}</div>
 		</c:if>
 
 		<c:if test="${not empty message}">
