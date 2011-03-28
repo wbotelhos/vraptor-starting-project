@@ -43,6 +43,10 @@
 		<decorator:body/>
 
 		<script type="text/javascript">
+			function dummy() {
+				alert('Dummy function! =~');
+			};
+
 			$.ajaxSetup({
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				error: function() {
