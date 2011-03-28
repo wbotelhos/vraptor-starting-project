@@ -27,7 +27,7 @@
 	<a href="javascript:void(0);" onclick="mensagem('title', 'message');">Mensagem</a> |
 	<a href="javascript:void(0);" onclick="confirmar('title', 'yes', 'no', 'confirm?', dummy);">Confirmar</a><br/><br/>
 
-	<fmt:message key="palavra.chave" />:<br/><br/>
+	<fmt:message key="palavras.chave" />:<br/><br/>
 
 	- Annotation;<br/>
 	- Component;<br/>
