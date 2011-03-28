@@ -4,8 +4,11 @@
 
 <body>
 	<fmt:message key="usuario" />:
-	<a href="<c:url value="/usuario" />"><fmt:message key="listagem" /></a> | <a href="<c:url value="/usuario/novo" />"><fmt:message key="novo" /></a>
-	<br/><br/>
+	<a href="<c:url value="/usuario" />"><fmt:message key="listagem" /></a> |
+	<a href="<c:url value="/usuario/novo" />"><fmt:message key="novo" /></a><br/><br/>
+
+	<a href="javascript:void(0);" onclick="mensagem('title', 'message');">Mensagem</a> |
+	<a href="javascript:void(0);" onclick="confirmar('title', 'yes', 'no', 'confirm?', dummy);">Confirmar</a><br/><br/>
 
 	<fmt:message key="projeto" />:<br/><br/>
 
