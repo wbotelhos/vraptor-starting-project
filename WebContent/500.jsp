@@ -18,6 +18,6 @@
 		<title><fmt:message key="erro"/> 500!</title>
 	</head>
 	<body>
-		<fmt:message key="erro500"/>
+		<fmt:message key="erro.500"/>
 	</body>
 </html>

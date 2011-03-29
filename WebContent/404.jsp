@@ -18,6 +18,6 @@
 		<title><fmt:message key="erro"/> 404!</title>
 	</head>
 	<body>
-		<fmt:message key="erro404"/>
+		<fmt:message key="erro.404"/>
 	</body>
 </html>
