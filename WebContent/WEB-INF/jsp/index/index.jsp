@@ -53,5 +53,5 @@
 	- VRaptor 3;<br/>
 	- XHTML;<br/><br/>
 
-	<fmt:message key="artigosEm" />: <a href="http://www.wbotelhos.com.br/" target="_blank">wbotelhos.com.br</a>
+	Artigos em: <a href="http://www.wbotelhos.com.br/" target="_blank">wbotelhos.com.br</a>
 </body>
