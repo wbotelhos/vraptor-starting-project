@@ -7,8 +7,8 @@
 	<c:choose>
 		<c:when test="${empty userSession.user.nome}">
 			Visitante<br/><br/>
-			
-			<form action="<c:url value='/autenticar'/>" method="post">
+
+			<form action="${pageContext.request.contextPath}/autenticar" method="post">
 				E-mail: <input type="text" name="entity.email"/><br/>
 				Senha: <input type="text" name="entity.senha"/><br/>
 
