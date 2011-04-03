@@ -89,6 +89,7 @@
 				<include name="1-reset.css" />
 				<include name="jquery-ui-1.8.11.css" />
 				<include name="common.css" />
+				<include name="dummy.css" />
 			</fileset>
 		</concat>
 
