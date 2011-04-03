@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
+import org.hibernate.validator.Email;
+
 import br.com.wbotelhos.blank.model.common.AbstractEntity;
 import br.com.wbotelhos.blank.model.common.TipoPerfil;
 
@@ -14,6 +16,9 @@ public class Usuario extends AbstractEntity {
 	private static final long serialVersionUID = -2011617444465730587L;
 
 	private String nome;
+
+	@Email
+	@Column(unique = true)
 	private String email;
 
 	@Column(length = 13)
