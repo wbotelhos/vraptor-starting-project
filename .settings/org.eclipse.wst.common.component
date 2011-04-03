@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project-modules id="moduleCoreId" project-version="1.5.0">
-<wb-module deploy-name="vraptor-blank-project">
-<wb-resource deploy-path="/" source-path="/WebContent"/>
-<wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
-<wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
-<property name="context-root" value="vraptor-blank-project"/>
-<property name="java-output-path" value="/vraptor-blank-project/build/classes"/>
-</wb-module>
+	<wb-module deploy-name="vraptor-starting-project">
+
+	<wb-resource deploy-path="/" source-path="/WebContent"/>
+	<wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+	<wb-resource deploy-path="/WEB-INF/classes" source-path="/test"/>
+
+	<property name="java-output-path" value="/vraptor-starting-project/build/classes"/>
+		<property name="context-root" value="vraptor-starting-project"/>
+	</wb-module>
 </project-modules>
