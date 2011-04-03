@@ -69,7 +69,7 @@
 		<echo>Compressing JS...</echo>
 		<concat destfile="${dist.js.dir}/javascript.temp.js" fixlastline="true">
 			<fileset dir="${dist.js.dir}">
-				<include name="jquery-1.5.2.js" />
+				<include name="1-jquery-1.5.2.js" />
 				<include name="jquery-ui-1.8.11.js" />
 				<include name="javascript.js" />
 			</fileset>
@@ -86,7 +86,7 @@
 		<echo>Compressing CSS...</echo>
 		<concat destfile="${dist.css.dir}/stylesheet.css" fixlastline="true">
 			<fileset dir="${dist.css.dir}">
-				<include name="reset.css" />
+				<include name="1-reset.css" />
 				<include name="jquery-ui-1.8.11.css" />
 				<include name="common.css" />
 			</fileset>
@@ -206,8 +206,8 @@
 	</target>
 
 	<target name="all" depends="war">
-		<delete dir="${instrumented.dir}/" />
-		<delete dir="${dist.test.dir}/" />
+		<delete dir="${instrumented.dir}" />
+		<delete dir="${dist.test.dir}" />
 		<delete dir="${dist.app.dir}" />
 	</target>
 
