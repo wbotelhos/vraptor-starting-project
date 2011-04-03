@@ -66,7 +66,7 @@ public class UsuarioBusinessTest {
 		repository.remove(entity);
 
 		// then
-		entity = verify(manager).find(Usuario.class, entity.getId());
+		entity = verify(manager).getReference(Usuario.class, entity.getId());
 		verify(manager).remove(entity);
 	}
 
