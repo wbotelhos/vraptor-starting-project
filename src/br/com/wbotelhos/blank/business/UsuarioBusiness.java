@@ -10,7 +10,7 @@ import br.com.wbotelhos.blank.repository.UsuarioRepository;
 @Component
 public class UsuarioBusiness extends GenericBusiness<Usuario> implements UsuarioRepository {
 
-	UsuarioBusiness(EntityManager manager) {
+	public UsuarioBusiness(EntityManager manager) {
 		super(manager);
 	}
 
