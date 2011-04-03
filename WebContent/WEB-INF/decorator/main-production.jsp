@@ -21,23 +21,32 @@
 	<body>
 		<div id="mensagem"></div>
 
-		<c:if test="${not empty errors}">
-			<div id="errors" class="error">
-				<c:forEach var="error" items="${errors}">
-			  		${error.category} - ${error.message}<br/>
-				</c:forEach>
+		<div id="wrapper">
+			<div id="topo"><%@ include file="/topo.jsp" %></div>
+			<div id="menu"><%@ include file="/menu.jsp" %></div>
+	
+			<div id="content">
+				<c:if test="${not empty errors}">
+					<div id="errors" class="error">
+						<c:forEach var="error" items="${errors}">
+					  		${error.category} - ${error.message}<br/>
+						</c:forEach>
+					</div>
+				</c:if>
+		
+				<c:if test="${not empty error}">
+					<div id="error" class="error">${error}</div>
+				</c:if>
+		
+				<c:if test="${not empty message}">
+					<div id="message" class="message">${message}</div>
+				</c:if>
+
+				<decorator:body/>
 			</div>
-		</c:if>
-
-		<c:if test="${not empty error}">
-			<div id="error" class="error">${error}</div>
-		</c:if>
-
-		<c:if test="${not empty message}">
-			<div id="message" class="message">${message}</div>
-		</c:if>
-
-		<decorator:body/>
+	
+			<div id="rodape"><%@ include file="/rodape.jsp" %></div>
+		</div>
 
 		<script type="text/javascript">
 			function dummy() {
