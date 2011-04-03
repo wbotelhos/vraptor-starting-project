@@ -1,8 +1,8 @@
 /**
  *
- * VRaptor Blank Project
+ * VRaptor Starting Project
  *
- * @what       VRaptor blank project ready for use.
+ * @what       VRaptor starting project ready to use.
  * @author     @wbotelhos
  *
  * @blog       http://wbotelhos.com.br
@@ -15,7 +15,10 @@
  * @keywords
  * 
  * Annotation;
+ * ANT;
+ * Build;
  * Component;
+ * Coverage;
  * CRUD;
  * Dependency Injection;
  * Eclipse;
@@ -29,13 +32,16 @@
  * jQuery;
  * JSP;
  * Log4j;
+ * Minify;
  * MVC;
  * MySQL;
  * Permission Control;
  * POJO;
  * Prelude;
+ * Test Report;
  * Repository;
  * REST;
+ * Unit Test;
  * VRaptor 3;
  * XHTML;
  *
