@@ -1,5 +1,5 @@
 <head>
-	<title>VRaptor | Blank Project</title>
+	<title>VRaptor | Starting Project</title>
 </head>
 
 <body>

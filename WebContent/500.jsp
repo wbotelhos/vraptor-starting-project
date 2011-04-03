@@ -6,9 +6,9 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
 		<link type="image/x-icon" rel="shortcut icon" href="<c:url value='/favicon.ico'/>"/>
 
-		<meta name="description" content="VRaptor Blank Project" />
+		<meta name="description" content="VRaptor Starting Project" />
 		<meta name="author" content="Washington Botelho dos Santos"/>
-		<meta name="keywords" content="vraptor,blank,project"/>
+		<meta name="keywords" content="vraptor,starting,project"/>
 
 		<link type="text/css" rel="stylesheet" href="<c:url value='/css/stylesheet.css'/>"/>
 
