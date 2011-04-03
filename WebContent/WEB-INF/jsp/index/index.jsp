@@ -26,32 +26,5 @@
 	<a href="javascript:void(0);" onclick="mensagem('title', 'message');">Mensagem</a> |
 	<a href="javascript:void(0);" onclick="confirmar('title', 'yes', 'no', 'confirm?', dummy);">Confirmar</a><br/><br/>
 
-	Palavras-chave:<br/><br/>
-
-	- Annotation;<br/>
-	- Component;<br/>
-	- CRUD;<br/>
-	- Dependency Injection;<br/>
-	- Eclipse;<br/>
-	- ENUM;<br/>
-	- Expression Language (EL);<br/>
-	- Generic Class;<br/>
-	- Interceptor;<br/>
-	- Internacionalization (I18N);<br/> 
-	- JPA/Hibernate;<br/>
-	- jQuery UI;<br/>
-	- jQuery;<br/>
-	- JSP;<br/>
-	- Log4j;<br/>
-	- MVC;<br/>
-	- MySQL;<br/>
-	- Permission Control;<br/>
-	- POJO;<br/>
-	- Prelude;<br/>
-	- Repository;<br/>
-	- REST;<br/>
-	- VRaptor 3;<br/>
-	- XHTML;<br/><br/>
-
 	Artigos em: <a href="http://www.wbotelhos.com.br/" target="_blank">wbotelhos.com.br</a>
 </body>
