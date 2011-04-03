@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding='UTF-8' ?>
+
+<project name="VRaptorStartingProject" basedir=".." default="all">
+	<echo message="Java Version: ${ant.java.version}"/>
+
+	<property file="ant/build.properties" />
+
+	<path id="build.path">
+		<fileset dir="${lib.dir}/build" includes="**.jar"/>
+	</path>
+
+	<path id="lib.path">
+		<fileset dir="${web.dir}/WEB-INF/lib" includes="**.jar"/>
+	</path>
+
+	<path id="coverage.path">
+		<fileset dir="${coverage.app.dir}">
+			<include name="cobertura.jar" />
+			<include name="${lib.dir}/**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<echo>Cleaning...</echo>
+		<delete dir="${dist.app.dir}" />
+		<delete dir="${dist.test.dir}" />
+		<delete dir="${instrumented.dir}" />
+		<delete dir="${coverage.dir}" />
+		<delete dir="${report.dir}/xml" />
+		<delete dir="${war.dir}" />
+	</target>
+
+	<target name="make" depends="clean">
+		<echo>Creating directories...</echo>
+		<mkdir dir="${dist.app.dir}" />
+		<mkdir dir="${dist.test.dir}" />
+		<mkdir dir="${instrumented.dir}" />
+		<mkdir dir="${coverage.dir}" />
+		<mkdir dir="${report.dir}/xml" />
+		<mkdir dir="${war.dir}" />
+	</target>
+
+	<target name="copy" depends="make">
+		<echo>Copying root...</echo>
+		<copy todir="${dist.app.dir}">
+			<fileset dir="${app.root}">
+				<include name="*.html" />
+				<include name="*.xml" />
+			</fileset>
+		</copy>
+
+		<echo>Copying webcontent...</echo>
+		<copy todir="${dist.app.dir}">
+			<fileset dir="${web.dir}" />
+		</copy>
+
+		<echo>Copying src...</echo>
+		<copy todir="${dist.classes.dir}">
+			<fileset dir="${src.dir}" excludes="**/*.java" />
+		</copy>
+
+		<echo>Copying test...</echo>
+		<copy todir="${dist.test.dir}">
+			<fileset dir="${test.dir}" excludes="**/*.java" />
+		</copy>
+	</target>
+
+	<target name="minify" depends="copy">
+		<echo>Compressing JS...</echo>
+		<concat destfile="${dist.js.dir}/javascript.temp.js" fixlastline="true">
+			<fileset dir="${dist.js.dir}">
+				<include name="jquery-1.5.2.js" />
+				<include name="jquery-ui-1.8.11.js" />
+				<include name="javascript.js" />
+			</fileset>
+		</concat>
+
+		<java jar="${yuicompressor.jar}" fork="true">
+			<arg value="${dist.js.dir}/javascript.temp.js" />
+			<arg value="-o" />
+			<arg value="${dist.js.dir}/javascript.js" />
+		</java>
+
+		<delete dir="${dist.js.dir}" excludes="javascript.js" />
+
+		<echo>Compressing CSS...</echo>
+		<concat destfile="${dist.css.dir}/stylesheet.css" fixlastline="true">
+			<fileset dir="${dist.css.dir}">
+				<include name="reset.css" />
+				<include name="jquery-ui-1.8.11.css" />
+				<include name="common.css" />
+			</fileset>
+		</concat>
+
+		<java jar="${yuicompressor.jar}" fork="true">
+			<arg value="${dist.css.dir}/stylesheet.css" />
+			<arg value="-o" />
+			<arg value="${dist.css.dir}/stylesheet.css" />
+		</java>
+
+		<delete dir="${dist.css.dir}" excludes="stylesheet.css" />
+	</target>
+
+	<target name="rename" depends="minify">
+		<echo>Renomeando persistence...</echo>
+		<delete file="${dist.meta.dir}/persistence.xml" />
+		<copy file="${dist.meta.dir}/persistence-production.xml" tofile="${dist.meta.dir}/persistence.xml" />
+		<delete file="${dist.meta.dir}/persistence-production.xml" />
+
+		<echo>Renomeando log4j...</echo>
+		<delete file="${dist.classes.dir}/log4j.xml" />
+		<copy file="${dist.classes.dir}/log4j-production.xml" tofile="${dist.classes.dir}/log4j.xml" />
+		<delete file="${dist.classes.dir}/log4j-production.xml" />
+
+		<echo>Renomeando decorators...</echo>
+		<delete file="${dist.webinf.dir}/decorator/main.jsp" />
+		<copy file="${dist.webinf.dir}/decorator/main-production.jsp" tofile="${dist.webinf.dir}/decorator/main.jsp" />
+		<delete file="${dist.webinf.dir}/decorator/main-production.jsp" />
+	</target>
+
+	<target name="compile" depends="rename">
+		<echo>Compiling classes...</echo>
+		<javac destdir="${dist.classes.dir}" srcdir="${src.dir}" debug="true"
+				debuglevel="vars,lines,source" source="1.6" target="1.6">
+			<classpath>
+				<path refid="lib.path" />
+				<path refid="build.path" />
+			</classpath>
+		</javac>
+
+		<echo>Compiling test classes...</echo>
+		<javac destdir="${dist.test.dir}" srcdir="${test.dir}" debug="true"
+				debuglevel="vars,lines,source" source="1.6" target="1.6">
+			<classpath>
+				<path refid="lib.path" />
+				<path refid="build.path" />
+				<pathelement path="${dist.classes.dir}" />
+			</classpath>
+		</javac>
+	</target>
+
+	<echo>Creating coverage...</echo>
+	<taskdef classpathref="coverage.path" resource="tasks.properties" />
+
+	<target name="instrument" depends="compile">
+		<cobertura-instrument datafile="${coverage.dir}/cobertura.ser" todir="${instrumented.dir}">
+			<ignore regex="org.apache.log4j.*" />
+
+		    <fileset dir="${dist.classes.dir}">
+		        <include name="**/*.class"/>
+		    </fileset>
+		</cobertura-instrument>
+	</target>
+
+	<echo>Testing junit...</echo>
+	<target name="test-junit" depends="instrument">
+		<junit fork="true" showoutput="false">
+			<sysproperty key="net.sourceforge.cobertura.datafile" file="${coverage.dir}/cobertura.ser" />
+			<sysproperty key="basedir" value=".." />
+			<formatter type="xml" />
+
+			<classpath location="${instrumented.dir}" />
+
+			<classpath>
+				<path refid="build.path" />
+				<path refid="lib.path" />
+				<fileset dir="${coverage.app.dir}">
+					<include name="cobertura.jar" />
+				</fileset>
+
+				<pathelement path="${instrument.dir}" />
+				<pathelement path="${dist.classes.dir}" />
+				<pathelement path="${dist.test.dir}" />
+			</classpath>
+
+			<test name="${testcase}" todir="${report.dir}" if="testcase" />
+
+			<batchtest todir="${report.dir}/xml" unless="testcase">
+				<fileset dir="${dist.test.dir}">
+					<include name="**/**Test.class" />
+				</fileset>
+			</batchtest>
+		</junit>
+	</target>
+
+	<echo>Testing coverage...</echo>
+	<target name="coverage" depends="test-junit">
+	    <cobertura-report srcdir="${src.dir}" destdir="${coverage.dir}" datafile="${coverage.dir}/cobertura.ser" />
+	</target>
+
+	<target name="report-junit" depends="coverage">
+		<junitreport todir="${report.dir}">
+			<fileset dir="${report.dir}/xml">
+				<include name="TEST-*.xml" />
+			</fileset>
+
+			<report todir="${report.dir}" format="frames" />
+		</junitreport>
+	</target>
+
+	<echo>Creating war...</echo>
+	<target name="war" depends="report-junit">
+		<war destfile="${war.file}" webxml="${dist.webinf.dir}/web.xml">
+			<zipfileset dir="${dist.app.dir}" />
+		</war>
+	</target>
+
+	<target name="all" depends="war">
+		<delete dir="${instrumented.dir}/" />
+		<delete dir="${dist.test.dir}/" />
+		<delete dir="${dist.app.dir}" />
+	</target>
+
+	<echo>Checking coverage...</echo>
+	<target name="coverage-check">
+		<cobertura-check branchrate="80" totallinerate="80" datafile="${coverage.dir}/cobertura.ser" />
+	</target>
+
+</project>
