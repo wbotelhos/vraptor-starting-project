@@ -11,6 +11,6 @@ public interface GenericImageRepository<T extends AbstractImage> {
 
 	void updateImage(T entity);
 
-	void uploadImage(UploadedFile file, T entity) throws Exception;
+	void uploadImage(T entity, UploadedFile file) throws Exception;
 
 }

@@ -42,7 +42,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage> extends Gene
 		query.executeUpdate();
 	}
 
-	public void uploadImage(UploadedFile file, T entity) throws Exception {
+	public void uploadImage(T entity, UploadedFile file) throws Exception {
 		String extensao = Image.getExtension(file.getFileName());
 
 		if (!Image.isValidExtension(extensao)) {
