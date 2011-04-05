@@ -7,13 +7,13 @@ import javax.persistence.Enumerated;
 
 import org.hibernate.validator.Email;
 
-import br.com.wbotelhos.starting.model.common.AbstractEntity;
+import br.com.wbotelhos.starting.model.common.AbstractImage;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 
 @Entity
-public class Usuario extends AbstractEntity {
+public class Usuario extends AbstractImage {
 
-	private static final long serialVersionUID = -2011617444465730587L;
+	private static final long serialVersionUID = 8803183393968819389L;
 
 	private String nome;
 
@@ -58,6 +58,11 @@ public class Usuario extends AbstractEntity {
 
 	public void setPerfil(TipoPerfil perfil) {
 		this.perfil = perfil;
+	}
+
+	@Override
+	public String getFolderName() {
+		return "usuario";
 	}
 
 }
