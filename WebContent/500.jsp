@@ -12,7 +12,7 @@
 
 		<link type="text/css" rel="stylesheet" href="<c:url value='/css/stylesheet.css'/>"/>
 
-		<script type="text/javascript" src="<c:url value='/js/jquery-1.5.1.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/1-jquery-1.5.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.11.js'/>"></script>
 
 		<title><fmt:message key="erro"/> 500!</title>
