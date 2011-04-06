@@ -66,6 +66,10 @@ public class UsuarioController {
 
 	@Post("/usuario")
 	public void salvar(Usuario entity) {
+		validator.validate(entity);
+
+		validator.onErrorUsePageOf(this).novo();
+
 		entity = repository.save(entity);
 
 		result
