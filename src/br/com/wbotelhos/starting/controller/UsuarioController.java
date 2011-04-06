@@ -68,7 +68,7 @@ public class UsuarioController {
 	public void salvar(Usuario entity) {
 		validator.validate(entity);
 
-		validator.onErrorUsePageOf(this).novo();
+		validator.onErrorRedirectTo(this).novo();
 
 		entity = repository.save(entity);
 
