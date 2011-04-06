@@ -9,9 +9,10 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.Spy;
 
 import br.com.caelum.vraptor.Result;
+import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.wbotelhos.starting.component.UserSession;
-import br.com.wbotelhos.starting.controller.UsuarioController;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 
@@ -20,19 +21,17 @@ public class UsuarioControllerTest {
 	private Usuario entity;
 	private UsuarioController controller;
 
-	@Spy
-	private Result result = new MockResult();
+	@Spy private Result result = new MockResult();
 
-	@Mock
-	private UserSession userSession;
-
-	@Mock
-	private UsuarioRepository repository;
+	@Mock private UserSession userSession;
+	@Mock private UsuarioRepository repository;
+	@Mock private Validator validator;
+	@Mock private Localization localization;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		controller = new UsuarioController(result, repository);
+		controller = new UsuarioController(result, repository, validator, localization);
 	}
 
 	@Test
