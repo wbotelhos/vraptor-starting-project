@@ -3,6 +3,7 @@ package br.com.wbotelhos.starting.business.common;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -10,6 +11,7 @@ import javax.persistence.Query;
 import org.apache.commons.io.IOUtils;
 
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
+import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.common.AbstractImage;
 import br.com.wbotelhos.starting.repository.common.GenericImageRepository;
 import br.com.wbotelhos.starting.util.Image;
@@ -42,22 +44,27 @@ public abstract class GenericImageBusiness<T extends AbstractImage> extends Gene
 		query.executeUpdate();
 	}
 
-	public void uploadImage(T entity, UploadedFile file) throws Exception {
-		String extensao = Image.getExtension(file.getFileName());
+	public void uploadImage(T entity, UploadedFile uploadedFile) throws UploadException {
+		String extension = Image.getExtension(uploadedFile.getFileName());
 
-		if (!Image.isValidExtension(extensao)) {
-			throw new Exception("Tipo de arquivo não permitido!\nUse: JPG, JPEG, GIF, BMP ou PNG.");
+		entity.setImagem(entity.getId() + extension);
+
+		File folder = new File(entity.getFolderPath());
+
+		if (!folder.exists()) {
+			folder.mkdirs();
 		}
 
-		entity.setImagem(entity.getId() + extensao);
+		File file = new File(folder, entity.getImagem());
 
-		File diretorio = new File(entity.getFolderPath());
-		
-		if (!diretorio.exists()) {
-			diretorio.mkdirs();
+		try {
+			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
+		} catch (FileNotFoundException e) {
+			throw new UploadException("caminho.destino.invalido");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new UploadException("erro.enviar.arquivo");
 		}
-
-		IOUtils.copy(file.getFile(), new FileOutputStream(new File(entity.getImagePath())));
 
 		this.updateImage(entity);
 	}
