@@ -16,7 +16,7 @@
 		<input type="submit" value="Remover"/>
 	</form><br/>
 
-	<img src="<c:url value='/usuario/1/image/170/150' />" alt="" /><br/><br/>
+	<img src="<c:url value='/usuario/${entity.id}/image/170/150' />" alt="" /><br/><br/>
 
 	<form action="<c:url value='/usuario/${entity.id}/image' />" enctype="multipart/form-data" method="post">
 		<input type="file" name="file"/>
