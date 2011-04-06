@@ -21,10 +21,12 @@
  * Coverage;
  * CRUD;
  * Dependency Injection;
+ * Download;
  * Eclipse;
  * ENUM;
  * Expression Language (EL);
  * Generic Class;
+ * Inheritance;
  * Interceptor;
  * Internacionalization (I18N); 
  * JPA/Hibernate;
@@ -42,7 +44,8 @@
  * Repository;
  * REST;
  * Unit Test;
+ * Upload;
  * VRaptor 3;
- * XHTML;
+ * XHTML.
  *
  */
