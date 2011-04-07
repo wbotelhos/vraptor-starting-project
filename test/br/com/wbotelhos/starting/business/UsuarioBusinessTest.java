@@ -85,7 +85,7 @@ public class UsuarioBusinessTest {
 
 	private void dadoQueTenhoUmUsuario() {
 		entity = new Usuario();
-		entity.setId(42l);
+		entity.setId(System.currentTimeMillis());
 		entity.setNome("Washington Botelho");
 		entity.setEmail("mail@gmail.com");
 		entity.setSenha("password");
