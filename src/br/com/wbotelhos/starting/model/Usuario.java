@@ -6,6 +6,8 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 
 import org.hibernate.validator.Email;
+import org.hibernate.validator.NotEmpty;
+import org.hibernate.validator.NotNull;
 
 import br.com.wbotelhos.starting.model.common.AbstractImage;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
@@ -15,15 +17,22 @@ public class Usuario extends AbstractImage {
 
 	private static final long serialVersionUID = 8803183393968819389L;
 
+	@NotNull
+	@NotEmpty
 	private String nome;
 
 	@Email
+	@NotNull
+	@NotEmpty
 	@Column(unique = true)
 	private String email;
 
+	@NotNull
+	@NotEmpty
 	@Column(length = 13)
 	private String senha;
 
+	@NotNull
 	@Column(length = 13)
 	@Enumerated(EnumType.STRING)
 	private TipoPerfil perfil;
