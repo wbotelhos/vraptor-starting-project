@@ -21,7 +21,6 @@ public abstract class AbstractImage extends AbstractEntity {
 
 	private static final long serialVersionUID = 7003348999944464969L;
 
-	private static final int RESIZE_DEFAULT = 50;
 	private static final String IMAGE_DEFAULT = "default.jpg"; 
 	private static final String IMAGE_NOT_FOUND = "not-found.jpg"; 
 	public static final String IMAGE_PATH = "/Users/botelho/movy/img";
@@ -98,45 +97,38 @@ public abstract class AbstractImage extends AbstractEntity {
 	public InputStreamDownload getThumb(String path, int width, int height) {
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
-	
+
 			int type = (image.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
 	
 			int imageWidth = image.getWidth();
 			int imageHeight = image.getHeight();
 	
-			int widthDiff = imageWidth - width;
-			int heightDiff = imageHeight - height;
-	
-			int widthRest = widthDiff % RESIZE_DEFAULT;
-			int heightRest = heightDiff % RESIZE_DEFAULT;
-	
-			int widthTemp = widthDiff - widthRest;
-			int heightTemp = heightDiff - heightRest;
-	
-			int steps = (widthTemp > heightTemp) ? widthTemp : heightTemp / RESIZE_DEFAULT;
-	
-			widthTemp += width;
-			heightTemp += height;
-	
-			for (int i = 0; i < steps; i++) {
-				if (widthTemp != width) {
-					widthTemp -= RESIZE_DEFAULT;
+			do {
+				if (imageWidth > width) {
+					imageWidth /= 2;
+
+					if (imageWidth < width) {
+						imageWidth= width;
+					}
 				}
-	
-				if (heightTemp != height) {
-					heightTemp -= RESIZE_DEFAULT;
+
+				if (imageHeight > height) {
+					imageHeight /= 2;
+
+					if (imageHeight < height) {
+						imageHeight= height;
+					}
 				}
-	System.out.println(widthTemp + "x" + heightTemp);
-				BufferedImage imageTemp = new BufferedImage(widthTemp, heightTemp, type);
-	
-				Graphics2D g2 = imageTemp.createGraphics();
-				g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-				g2.drawImage(image, 0, 0, widthTemp, heightTemp, null);
-				g2.dispose();
-		
+
+				BufferedImage imageTemp = new BufferedImage(imageWidth, imageHeight, type);
+				Graphics2D graph = imageTemp.createGraphics();
+				graph.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+				graph.drawImage(image, 0, 0, imageWidth, imageHeight, null);
+				graph.dispose();
+
 				image = imageTemp;
-			}
-	
+			} while (imageWidth != width || imageHeight != height);
+
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
 	
 			ImageIO.write(image, "jpeg", output);
