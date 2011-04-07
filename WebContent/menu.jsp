@@ -8,8 +8,10 @@
 	</c:if>
 </div>
 
+<c:set var="uri" value="${fn:replace(pageContext.request.requestURI, pageContext.request.contextPath, '')}"/>
+
 <div id="identification">
-	[${empty sessionScope.language ? 'BR' : sessionScope.language}] <fmt:message key="bem.vindo" />:
+    [ <a href="<c:url value='${uri}?br'/>">BR</a>&nbsp; | <a href="<c:url value='${uri}?us'/>">US</a> ] <fmt:message key="bem.vindo" />:
 
 	<c:choose>
 		<c:when test="${userSession.user == null}">
