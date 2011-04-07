@@ -37,7 +37,7 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaLoadAllTest() throws Exception {
+	public void deveriaLoadAll() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -47,7 +47,7 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaLoadByIdTest() throws Exception {
+	public void deveriaLoadById() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -59,7 +59,7 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaRemoveTest() throws Exception {
+	public void deveriaRemove() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -72,7 +72,7 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaSaveTest() throws Exception {
+	public void deveriaSave() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 

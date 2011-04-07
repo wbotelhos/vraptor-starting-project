@@ -23,7 +23,7 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void deveriaIndexTest() throws Exception {
+	public void deveriaIndex() throws Exception {
 		// given
 
 		// when

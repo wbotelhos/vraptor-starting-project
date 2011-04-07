@@ -14,6 +14,7 @@ import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
+import br.com.wbotelhos.starting.model.common.TipoPerfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 
 public class UsuarioControllerTest {
@@ -35,7 +36,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaEditarTest() throws Exception {
+	public void deveriaEditar() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -48,7 +49,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaExibirTest() throws Exception {
+	public void deveriaExibir() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -61,7 +62,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaRemoverTest() throws Exception {
+	public void deveriaRemover() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -74,7 +75,7 @@ public class UsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveriaSalvarTest() throws Exception {
+	public void deveriaSalvar() throws Exception {
 		// given
 		dadoQueTenhoUmUsuario();
 
@@ -92,6 +93,7 @@ public class UsuarioControllerTest {
 		entity.setNome("Washington Botelho");
 		entity.setEmail("mail@gmail.com");
 		entity.setSenha("password");
+		entity.setPerfil(TipoPerfil.ADMINISTRADOR);
 	}
 
 }
