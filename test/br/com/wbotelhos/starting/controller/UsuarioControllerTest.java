@@ -12,7 +12,6 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockResult;
-import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
@@ -24,7 +23,6 @@ public class UsuarioControllerTest {
 
 	@Spy private Result result = new MockResult();
 
-	@Mock private UserSession userSession;
 	@Mock private UsuarioRepository repository;
 	@Mock private Validator validator;
 	@Mock private Localization localization;
@@ -89,7 +87,7 @@ public class UsuarioControllerTest {
 	
 	private void dadoQueTenhoUmUsuario() {
 		entity = new Usuario();
-		entity.setId(42l);
+		entity.setId(System.currentTimeMillis());
 		entity.setNome("Washington Botelho");
 		entity.setEmail("mail@gmail.com");
 		entity.setSenha("password");
