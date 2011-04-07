@@ -113,7 +113,7 @@ public abstract class AbstractImage extends AbstractEntity {
 			int widthTemp = widthDiff - widthRest;
 			int heightTemp = heightDiff - heightRest;
 	
-			int steps = widthTemp / RESIZE_DEFAULT;
+			int steps = (widthTemp > heightTemp) ? widthTemp : heightTemp / RESIZE_DEFAULT;
 	
 			widthTemp += width;
 			heightTemp += height;
@@ -126,7 +126,7 @@ public abstract class AbstractImage extends AbstractEntity {
 				if (heightTemp != height) {
 					heightTemp -= RESIZE_DEFAULT;
 				}
-	
+	System.out.println(widthTemp + "x" + heightTemp);
 				BufferedImage imageTemp = new BufferedImage(widthTemp, heightTemp, type);
 	
 				Graphics2D g2 = imageTemp.createGraphics();
