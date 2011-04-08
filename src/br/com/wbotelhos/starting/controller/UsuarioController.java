@@ -80,7 +80,7 @@ public class UsuarioController {
 		repository.remove(entity);
 
 		result
-		.include("message", "Usu‡rio removido com sucesso!") // TODO: i18n
+		.include("message", i18n("usuario.removido.sucesso")) // TODO: i18n
 		.redirectTo(this).listagem();
 	}
 
