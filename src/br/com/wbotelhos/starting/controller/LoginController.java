@@ -1,5 +1,6 @@
 package br.com.wbotelhos.starting.controller;
 
+import static br.com.wbotelhos.starting.util.Utils.i18n;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
@@ -30,7 +31,7 @@ public class LoginController {
 	
 			result.redirectTo(IndexController.class).index();
 		} else {
-			result.include("error", "Usu‡rio ou senha incorreta!").redirectTo(IndexController.class).index();
+			result.include("error", i18n("email.senha.incorreta")).redirectTo(IndexController.class).index();
 		}
 	}
 
