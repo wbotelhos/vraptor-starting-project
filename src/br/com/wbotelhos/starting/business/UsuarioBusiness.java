@@ -1,7 +1,6 @@
 package br.com.wbotelhos.starting.business;
 
 import javax.persistence.EntityManager;
-import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.caelum.vraptor.ioc.Component;
@@ -17,19 +16,16 @@ public class UsuarioBusiness extends GenericImageBusiness<Usuario> implements Us
 		super(manager);
 	}
 
-	public Usuario getUsuarioByEmail(String email) {
-		try {
-			Query query = manager.createQuery("from Usuario where email = :email");
-			query.setParameter("email", email);
-			return (Usuario) query.getSingleResult();
-		} catch (NoResultException e) {
-			return null;
-		}
+	public boolean isMailExist(Usuario entity) {
+		Query query = manager.createQuery("select id from Usuario where email = :email and (:id is null or id != :id)");
+		query.setParameter("email", entity.getEmail());
+		query.setParameter("id", entity.getId());
+		return (query.getSingleResult() == null) ? false : true;
 	}
 
 	@Override
 	public Usuario save(Usuario entity) throws CommonException {
-		if (this.getUsuarioByEmail(entity.getEmail()) != null) {
+		if (this.isMailExist(entity)) {
 			throw new CommonException("email.ja.cadastrado");
 		}
 
