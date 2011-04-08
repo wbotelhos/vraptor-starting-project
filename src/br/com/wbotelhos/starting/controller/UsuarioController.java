@@ -1,5 +1,6 @@
 package br.com.wbotelhos.starting.controller;
 
+import static br.com.wbotelhos.starting.util.Utils.i18n;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -10,6 +11,7 @@ import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.interceptor.download.InputStreamDownload;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
+import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
@@ -67,14 +69,14 @@ public class UsuarioController {
 	@Post("/usuario")
 	public void salvar(Usuario entity) {
 		validator.validate(entity);
-
 		validator.onErrorRedirectTo(this).novo();
 
-		entity = repository.save(entity);
-
-		result
-		.include("message", "Usu‡rio salvo com sucesso!")
-		.redirectTo(this).exibir(entity);
+		try {
+			entity = repository.save(entity);
+			result.include("message", i18n("usuario.salvo.sucesso")).redirectTo(this).exibir(entity);
+		} catch (CommonException e) {
+			result.include("error", i18n(e.getMessage())).forwardTo(this).novo();
+		}
 	}
 
 	@Post("/usuario/{entity.id}/image")
