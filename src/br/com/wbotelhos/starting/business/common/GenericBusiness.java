@@ -6,6 +6,7 @@ import java.util.Collection;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 
+import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.model.common.AbstractEntity;
 import br.com.wbotelhos.starting.repository.common.GenericRepository;
 
@@ -40,7 +41,7 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements Gener
 		manager.remove(manager.getReference(clazz, entity.getId()));
 	}
 
-	public T save(T entity) {
+	public T save(T entity) throws CommonException {
 		return manager.merge(entity);
 	}
 
