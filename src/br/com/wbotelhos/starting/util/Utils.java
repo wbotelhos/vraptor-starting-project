@@ -3,6 +3,8 @@ package br.com.wbotelhos.starting.util;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 public class Utils {
 
@@ -26,5 +28,9 @@ public class Utils {
 
 		return text;
 	}
-	
+
+	public static String i18n(String text) {
+		return ResourceBundle.getBundle("messages", Locale.getDefault()).getString(text);
+	}
+
 }
