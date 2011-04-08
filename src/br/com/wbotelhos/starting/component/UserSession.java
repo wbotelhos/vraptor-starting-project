@@ -10,9 +10,10 @@ import br.com.wbotelhos.starting.model.Usuario;
 @SessionScoped
 public class UserSession implements Serializable {
 
-	private static final long serialVersionUID = -2122338680139826090L;
+	private static final long serialVersionUID = 8113472081570152045L;
 
 	private Usuario user;
+	private String language;
 
 	public boolean isLogged() {
 		return user != null;
@@ -28,6 +29,14 @@ public class UserSession implements Serializable {
 
 	public void setUser(Usuario user) {
 		this.user = user;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
 	}
 
 }
