@@ -41,7 +41,7 @@ public class IndexController {
 		try {
 			Locale.setDefault(new Locale(language, country));
 
-			userSession.setLanguage(language + "_" + country);
+			userSession.setLanguage(language + "_" + country.toUpperCase());
 
 		    result.use(referer()).redirect();
 		} catch (IllegalStateException e) {
