@@ -6,8 +6,20 @@
 	<fieldset>
 		<legend>Usu&aacute;rio</legend>
 
-		<form action="<c:url value='/usuario'/>" method="post">
-			<input type="hidden" name="entity.id" value="${entity.id}"/>
+		<c:choose>
+			<c:when test="${entity.id == null}">
+				<c:set var="uri" value="/usuario" />
+			</c:when>
+			<c:otherwise>
+				<c:set var="uri" value="/usuario/${entity.id}" />
+			</c:otherwise>
+		</c:choose>
+
+		<form action="${pageContext.request.contextPath}${uri}" method="post">
+			<c:if test="${entity.id != null}">
+				<input type="hidden" name="entity.id" value="${entity.id}"/>
+				<input type="hidden" name="_method" value="put"/>
+			</c:if>
 
 			Nome:	<input type="text" name="entity.nome" value="${entity.nome}"/><br/>
 			E-mail:	<input type="text" name="entity.email" value="${entity.email}"/><br/>
