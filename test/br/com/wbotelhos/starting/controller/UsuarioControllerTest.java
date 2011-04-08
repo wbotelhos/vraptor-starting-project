@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockResult;
+import br.com.caelum.vraptor.util.test.MockValidator;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
@@ -22,9 +23,9 @@ public class UsuarioControllerTest {
 	private UsuarioController controller;
 
 	@Spy private Result result = new MockResult();
+	@Spy Validator validator = new MockValidator();
 
 	@Mock private UsuarioRepository repository;
-	@Mock private Validator validator;
 	@Mock private Localization localization;
 
 	@Before
