@@ -2,16 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
-<c:choose>
-	<c:when test="${param.br != null}">
-		<fmt:setLocale value="pt_BR" scope="session" />
-		<c:set var="language" value="BR" scope="session" />
-	</c:when>
-
-	<c:when test="${param.us != null}">
-		<fmt:setLocale value="en_US" scope="session" />
-		<c:set var="language" value="US" scope="session" />
-	</c:when>
-</c:choose>
+<fmt:setLocale value="${userSession.language}" scope="session" />
 
 <fmt:setBundle basename="messages" />
