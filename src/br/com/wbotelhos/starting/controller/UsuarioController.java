@@ -4,6 +4,7 @@ import static br.com.wbotelhos.starting.util.Utils.i18n;
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
+import br.com.caelum.vraptor.Put;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
@@ -33,25 +34,42 @@ public class UsuarioController {
 		this.localization = localization;
 	}
 
-	@Get("/usuario/novo")
-	public void novo() {
-		result.include("perfilList", TipoPerfil.values());
+	@Put("/usuario/{entity.id}")
+	public void atualizar(Usuario entity) {
+		validator.validate(entity);
+		validator.onErrorRedirectTo(this).editar(entity);
+
+		try {
+			entity = repository.save(entity);
+			result.include("message", i18n("usuario.atualizado.sucesso")).redirectTo(this).exibir(entity);
+		} catch (CommonException e) {
+			result.include("error", i18n(e.getMessage())).redirectTo(this).editar(entity);
+		}
+	}
+
+	@Get("/usuario/criar")
+	public void criar(Usuario entity) {
+		result
+		.include("perfilList", TipoPerfil.values())
+		.include("entity", entity);
 	}
 
 	@Get("/usuario/{entity.id}/editar")
 	public void editar(Usuario entity) {
-		entity = repository.loadById(entity.getId());
+		result.include("perfilList", TipoPerfil.values());
 
-		result.include("entity", entity).forwardTo(this).novo();
+		if (entity.getEmail() == null) {
+			result.include("entity", repository.loadById(entity.getId()));
+		} else {
+			result.include("entity", entity);
+		}
 	}
 
-	@Get({ "/usuario/{entity.id}", "/usuario/{entity.id}/exibir" })
+	@Get("/usuario/{entity.id}")
 	public void exibir(Usuario entity) {
-		entity = repository.loadById(entity.getId());
-
-		result.include("entity", entity);
+		result.include("entity", repository.loadById(entity.getId()));
 	}
-
+	
 	@Get("/usuario")
 	public void listagem() {
 		result.include("entityList", repository.loadAll());
@@ -62,20 +80,23 @@ public class UsuarioController {
 		repository.remove(entity);
 
 		result
-		.include("message", "Usu‡rio removido com sucesso!")
+		.include("message", "Usu‡rio removido com sucesso!") // TODO: i18n
 		.redirectTo(this).listagem();
 	}
 
 	@Post("/usuario")
 	public void salvar(Usuario entity) {
 		validator.validate(entity);
-		validator.onErrorRedirectTo(this).novo();
+		validator.onErrorRedirectTo(this).criar(entity);
 
 		try {
+			entity.setImagem("default.jpg");
+
 			entity = repository.save(entity);
+
 			result.include("message", i18n("usuario.salvo.sucesso")).redirectTo(this).exibir(entity);
 		} catch (CommonException e) {
-			result.include("error", i18n(e.getMessage())).forwardTo(this).novo();
+			result.include("error", i18n(e.getMessage())).redirectTo(this).criar(entity);
 		}
 	}
 
@@ -90,8 +111,8 @@ public class UsuarioController {
 		try {
 			repository.uploadImage(entity, file);
 		} catch (UploadException e) {
-			result.include("error", e.getMessage());
-			e.printStackTrace();
+			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
+			e.printStackTrace(); // TODO: remover.
 		}
 
 		result.redirectTo(this).exibir(entity);
