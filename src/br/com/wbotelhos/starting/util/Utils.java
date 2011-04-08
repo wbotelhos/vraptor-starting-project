@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Locale;
+import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 public class Utils {
@@ -30,7 +31,11 @@ public class Utils {
 	}
 
 	public static String i18n(String text) {
-		return ResourceBundle.getBundle("messages", Locale.getDefault()).getString(text);
+		try {
+			return ResourceBundle.getBundle("messages", Locale.getDefault()).getString(text);
+		} catch (MissingResourceException e) {
+			return "???" + text + "???";
+		}
 	}
 
 }
