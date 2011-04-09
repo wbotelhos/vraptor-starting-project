@@ -13,10 +13,11 @@ import org.apache.commons.io.IOUtils;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.common.AbstractImage;
+import br.com.wbotelhos.starting.model.common.AbstractImageGallery;
 import br.com.wbotelhos.starting.repository.common.GenericImageRepository;
 import br.com.wbotelhos.starting.util.Image;
 
-public abstract class GenericImageBusiness<T extends AbstractImage> extends GenericBusiness<T> implements GenericImageRepository<T> {
+public abstract class GenericImageBusiness<T extends AbstractImage, I extends AbstractImageGallery> extends GenericBusiness<T> implements GenericImageRepository<T, I> {
 
 	public GenericImageBusiness(EntityManager manager) {
 		super(manager);
@@ -35,6 +36,10 @@ public abstract class GenericImageBusiness<T extends AbstractImage> extends Gene
 
 			this.updateImage(entity);
 		}
+	}
+
+	public void save(I entityImage) {
+		manager.merge(entityImage);
 	}
 
 	public void updateImage(T entity) {
@@ -67,6 +72,32 @@ public abstract class GenericImageBusiness<T extends AbstractImage> extends Gene
 		}
 
 		this.updateImage(entity);
+	}
+
+	public void uploadGallery(T entity, I entityImage, UploadedFile uploadedFile) throws UploadException {
+		String extension = Image.getExtension(uploadedFile.getFileName());
+
+		entityImage.setImagem(System.currentTimeMillis() + extension);
+
+		File folder = new File(entity.getFolderPath(), entity.getId().toString());
+
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+
+		File file = new File(folder, entityImage.getImagem());
+
+		try {
+			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+			throw new UploadException("caminho.destino.invalido");
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new UploadException("erro.enviar.arquivo");
+		}
+
+		this.save(entityImage);
 	}
 
 }
