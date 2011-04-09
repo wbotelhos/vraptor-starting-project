@@ -50,7 +50,7 @@ public abstract class AbstractImage extends AbstractEntity {
 	}
 
 	public String getDownloadFileName() {
-		return this.getImagem().substring(0, this.getImagem().indexOf("."));
+		return (this.getImagem() == null) ? this.getId().toString() : this.getImagem().substring(0, this.getImagem().indexOf("."));
 	}
 
 	public boolean hasImageDefault() {
