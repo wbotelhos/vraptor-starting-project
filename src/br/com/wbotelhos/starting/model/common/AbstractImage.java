@@ -57,6 +57,14 @@ public abstract class AbstractImage extends AbstractEntity {
 		return this.getImagem().equalsIgnoreCase(IMAGE_DEFAULT);
 	}
 
+	public InputStreamDownload getThumbGallery(String fileName, int width, int height) {
+		return this.getThumb(this.getFolderPath() + File.separator + this.getId().toString() + File.separator + fileName, width, height);
+	}
+
+	public InputStreamDownload getImageGallery(String fileName) {
+		return this.getImage(this.getFolderPath() + File.separator + this.getId().toString() + File.separator + fileName);
+	}
+
 	public InputStreamDownload getImageDefault() {
 		File file = new File(IMAGE_PATH + File.separator + this.getFolderName(), IMAGE_DEFAULT);
 
