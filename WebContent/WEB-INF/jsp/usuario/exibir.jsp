@@ -27,7 +27,7 @@
 	</fieldset><br/><br/>
 
 	<c:forEach items="${entity.imageList}" var="item">
-		<a href="javascript:void(0);" rel="gallery">
+		<a href="<c:url value='/usuario/${entity.id}/gallery/${item.imagem}' />" rel="gallery">
 			<img src="<c:url value='/usuario/${entity.id}/gallery/${item.imagem}/170/150' />" alt="" />
 		</a>
 	</c:forEach>
