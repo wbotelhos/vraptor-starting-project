@@ -16,6 +16,7 @@
 
 		<script type="text/javascript" src="<c:url value='/js/1-jquery-1.5.2.js'/>"></script>
 		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.11.js'/>"></script>
+		<script type="text/javascript" src="<c:url value='/js/jquery.colorbox-1.3.16.min.js'/>"></script>
 
 		<script type="text/javascript" src="<c:url value='/js/javascript.js'/>" charset="utf-8"></script>
 
