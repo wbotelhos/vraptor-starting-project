@@ -136,8 +136,8 @@ public class UsuarioController {
 	}
 
 	@Get("/usuario/{entity.id}/gallery/{fileName}")
-	public InputStreamDownload viewImageGallery(Usuario entity) {
-		return entity.getImage(entity.getImagePath());
+	public InputStreamDownload viewImageGallery(Usuario entity, String fileName) {
+		return entity.getImageGallery(fileName);
 	}
 
 	@Post("/usuario/{entity.id}/gallery")
