@@ -130,6 +130,16 @@ public class UsuarioController {
 		return entity.getImage(entity.getImagePath());
 	}
 
+	@Get("/usuario/{entity.id}/gallery/{fileName}/{width}/{height}")
+	public InputStreamDownload viewThumbGallery(Usuario entity, String fileName, int width, int height) {
+		return entity.getThumbGallery(fileName, width, height);
+	}
+
+	@Get("/usuario/{entity.id}/gallery/{fileName}")
+	public InputStreamDownload viewImageGallery(Usuario entity) {
+		return entity.getImage(entity.getImagePath());
+	}
+
 	@Post("/usuario/{entity.id}/gallery")
 	public void uploadGallery(Usuario entity, UsuarioImage entityImage, final UploadedFile file) {
 		validator.checking(new Validations(localization.getBundle()) {{
