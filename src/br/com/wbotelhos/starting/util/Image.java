@@ -6,8 +6,8 @@ public class Image {
 
 	public static String getExtension(String fileName) {
 		int last = fileName.lastIndexOf(".");
-		String extensao = (last > 0) ? fileName.substring(last) : "";
-		return (extensao.equalsIgnoreCase(".jpeg") ? ".jpg" : extensao).toLowerCase();
+		String extension = (last > 0) ? fileName.substring(last) : "";
+		return (extension.equalsIgnoreCase(".jpeg") ? ".jpg" : extension).toLowerCase();
 	}
 
 	public static boolean isValidFile(String fileName) {
