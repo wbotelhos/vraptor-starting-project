@@ -2,7 +2,6 @@ package br.com.wbotelhos.starting.model.common;
 
 import java.util.Collection;
 
-
 public class EntityWrapper<T extends AbstractEntity> {
 
 	private Collection<T> entityList;
