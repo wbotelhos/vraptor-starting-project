@@ -26,6 +26,12 @@
 		</form>
 	</fieldset><br/><br/>
 
+	<c:forEach items="${entity.imageList}" var="item">
+		<a href="javascript:void(0);" rel="gallery">
+			<img src="<c:url value='/usuario/${entity.id}/gallery/${item.imagem}/170/150' />" alt="" />
+		</a>
+	</c:forEach>
+
 	<fieldset>
 		<legend>Galeria</legend>
 		<form action="<c:url value='/usuario/${entity.id}/gallery' />" enctype="multipart/form-data" method="post">
@@ -38,4 +44,10 @@
 			<input type="submit" value="enviar"/>
 		</form>
 	</fieldset>
+
+	<script type="text/javascript">
+		$(function() {
+			$('a[rel="gallery"]').colorbox();
+		});
+	</script>
 </body>
