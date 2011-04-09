@@ -15,6 +15,7 @@ import br.com.caelum.vraptor.validator.Validations;
 import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.Usuario;
+import br.com.wbotelhos.starting.model.UsuarioImage;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 import br.com.wbotelhos.starting.util.Image;
@@ -128,6 +129,23 @@ public class UsuarioController {
 	public InputStreamDownload viewImage(Usuario entity) {
 		entity = repository.loadById(entity.getId());
 		return entity.getImage(entity.getImagePath());
+	}
+
+	@Post("/usuario/{entity.id}/gallery")
+	public void uploadGallery(Usuario entity, UsuarioImage entityImage, final UploadedFile file) {
+		validator.checking(new Validations(localization.getBundle()) {{
+			that(Image.isValidFile(file.getFileName()), i18n("imagem"), "imagem.invalida");
+	    }});
+
+		validator.onErrorUsePageOf(this).exibir(entity);
+
+		try {
+			repository.uploadGallery(entity, entityImage, file);
+		} catch (UploadException e) {
+			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
+		}
+
+		result.redirectTo(this).exibir(entity);
 	}
 
 }
