@@ -1,9 +1,13 @@
 package br.com.wbotelhos.starting.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.OneToMany;
 
 import org.hibernate.validator.Email;
 import org.hibernate.validator.NotEmpty;
@@ -15,7 +19,7 @@ import br.com.wbotelhos.starting.model.common.TipoPerfil;
 @Entity
 public class Usuario extends AbstractImage {
 
-	private static final long serialVersionUID = 8803183393968819389L;
+	private static final long serialVersionUID = 2831700789078671451L;
 
 	@NotNull
 	@NotEmpty
@@ -36,6 +40,9 @@ public class Usuario extends AbstractImage {
 	@Column(length = 13)
 	@Enumerated(EnumType.STRING)
 	private TipoPerfil perfil;
+
+	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
+	private List<UsuarioImage> imageList;
 
 	public String getNome() {
 		return nome;
@@ -67,6 +74,14 @@ public class Usuario extends AbstractImage {
 
 	public void setPerfil(TipoPerfil perfil) {
 		this.perfil = perfil;
+	}
+
+	public List<UsuarioImage> getImageList() {
+		return imageList;
+	}
+
+	public void setImageList(List<UsuarioImage> imageList) {
+		this.imageList = imageList;
 	}
 
 	@Override
