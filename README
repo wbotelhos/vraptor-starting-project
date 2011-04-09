@@ -17,12 +17,14 @@
  * Annotation;
  * ANT;
  * Build;
+ * Colorbox;
  * Component;
  * Coverage;
  * CRUD;
  * Dependency Injection;
  * Download;
  * Eclipse;
+ * Email;
  * ENUM;
  * Expression Language (EL);
  * Generic Class;
@@ -35,6 +37,7 @@
  * JSP;
  * Log4j;
  * Minify;
+ * Mockito;
  * MVC;
  * MySQL;
  * Permission Control;
@@ -43,7 +46,6 @@
  * Test Report;
  * Repository;
  * REST;
- * Unit Test;
  * Upload;
  * VRaptor 3;
  * XHTML.
