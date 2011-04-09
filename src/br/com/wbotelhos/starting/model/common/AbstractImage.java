@@ -50,7 +50,7 @@ public abstract class AbstractImage extends AbstractEntity {
 	}
 
 	public String getDownloadFileName() {
-		return (this.getImagem() == null) ? this.getId().toString() : this.getImagem().substring(0, this.getImagem().indexOf("."));
+		return (this.getImagem() == null) ? null : this.getImagem().substring(0, this.getImagem().indexOf("."));
 	}
 
 	public boolean hasImageDefault() {
@@ -76,6 +76,11 @@ public abstract class AbstractImage extends AbstractEntity {
 		}
 	}
 
+	private String getDownloadFileName(String path) {
+		File file = new File(path);
+		return (this.getDownloadFileName() == null) ? file.getName() : this.getDownloadFileName();
+	}
+
 	public InputStreamDownload getImageNotFound() {
 		File file = new File(IMAGE_PATH + File.separator + this.getFolderName(), IMAGE_NOT_FOUND);
 
@@ -95,7 +100,7 @@ public abstract class AbstractImage extends AbstractEntity {
 		}
 
 		try {
-			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", this.getDownloadFileName(), false, file.length());
+			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", this.getDownloadFileName(path), false, file.length());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			return this.getImageNotFound();
@@ -141,7 +146,7 @@ public abstract class AbstractImage extends AbstractEntity {
 	
 			ImageIO.write(image, "jpeg", output);
 
-			return new InputStreamDownload(new ByteArrayInputStream(output.toByteArray()), "image/jpeg", this.getDownloadFileName(), false, output.size());
+			return new InputStreamDownload(new ByteArrayInputStream(output.toByteArray()), "image/jpeg", this.getDownloadFileName(path), false, output.size());
 		} catch (IOException e) {
 			e.printStackTrace();
 			return this.getImageNotFound();
