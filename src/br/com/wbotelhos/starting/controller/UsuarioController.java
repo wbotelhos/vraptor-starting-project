@@ -81,7 +81,7 @@ public class UsuarioController {
 		repository.remove(entity);
 
 		result
-		.include("message", i18n("usuario.removido.sucesso")) // TODO: i18n
+		.include("message", i18n("usuario.removido.sucesso"))
 		.redirectTo(this).listagem();
 	}
 
@@ -113,7 +113,6 @@ public class UsuarioController {
 			repository.uploadImage(entity, file);
 		} catch (UploadException e) {
 			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
-			e.printStackTrace(); // TODO: remover.
 		}
 
 		result.redirectTo(this).exibir(entity);
