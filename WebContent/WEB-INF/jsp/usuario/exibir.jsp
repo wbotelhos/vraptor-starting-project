@@ -47,7 +47,9 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$('a[rel="gallery"]').colorbox();
+			$('a[rel="gallery"]').colorbox({
+				maxHeight:	'85%'
+			});
 		});
 	</script>
 </body>
