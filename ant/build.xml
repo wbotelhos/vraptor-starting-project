@@ -68,11 +68,7 @@
 	<target name="minify" depends="copy">
 		<echo>Compressing JS...</echo>
 		<concat destfile="${dist.js.dir}/javascript.temp.js" fixlastline="true">
-			<fileset dir="${dist.js.dir}">
-				<include name="1-jquery-1.5.2.js" />
-				<include name="jquery-ui-1.8.11.js" />
-				<include name="javascript.js" />
-			</fileset>
+			<fileset dir="${dist.js.dir}" includes="*.js" />
 		</concat>
 
 		<java jar="${yuicompressor.jar}" fork="true">
@@ -85,12 +81,7 @@
 
 		<echo>Compressing CSS...</echo>
 		<concat destfile="${dist.css.dir}/stylesheet.css" fixlastline="true">
-			<fileset dir="${dist.css.dir}">
-				<include name="1-reset.css" />
-				<include name="jquery-ui-1.8.11.css" />
-				<include name="common.css" />
-				<include name="dummy.css" />
-			</fileset>
+			<fileset dir="${dist.css.dir}" includes="*.css" excludes="stylesheet.css" />
 		</concat>
 
 		<java jar="${yuicompressor.jar}" fork="true">
@@ -206,6 +197,7 @@
 		</war>
 	</target>
 
+	<echo>Removing temp folders...</echo>
 	<target name="all" depends="war">
 		<delete dir="${instrumented.dir}" />
 		<delete dir="${dist.test.dir}" />
