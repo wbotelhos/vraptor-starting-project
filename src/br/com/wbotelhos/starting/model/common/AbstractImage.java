@@ -23,7 +23,7 @@ public abstract class AbstractImage extends AbstractEntity {
 
 	private static final String IMAGE_DEFAULT = "default.jpg"; 
 	private static final String IMAGE_NOT_FOUND = "not-found.jpg"; 
-	public static final String IMAGE_PATH = "/Users/botelho/movy/img";
+	public static final String IMAGE_PATH = System.getProperty("user.home") + File.separator + "vrsp" + File.separator + "img";
 
 	private String imagem;
 
