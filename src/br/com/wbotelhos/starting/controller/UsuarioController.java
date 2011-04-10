@@ -130,8 +130,8 @@ public class UsuarioController {
 		return entity.getImage(entity.getImagePath());
 	}
 
-	@Get("/usuario/{entity.id}/gallery/{fileName}/{width}/{height}")
-	public InputStreamDownload viewThumbGallery(Usuario entity, String fileName, int width, int height) {
+	@Get("/usuario/{entity.id}/gallery/{width}/{height}/{fileName}")
+	public InputStreamDownload viewThumbGallery(Usuario entity, int width, int height, String fileName) {
 		return entity.getThumbGallery(fileName, width, height);
 	}
 

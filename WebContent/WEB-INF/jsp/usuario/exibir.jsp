@@ -28,7 +28,7 @@
 
 	<c:forEach items="${entity.imageList}" var="item">
 		<a href="<c:url value='/usuario/${entity.id}/gallery/${item.imagem}' />" title="${item.titulo}" rel="gallery">
-			<img src="<c:url value='/usuario/${entity.id}/gallery/${item.imagem}/170/150' />" alt="" />
+			<img src="<c:url value='/usuario/${entity.id}/gallery/170/150/${item.imagem}' />" alt="" />
 		</a>
 	</c:forEach>
 
