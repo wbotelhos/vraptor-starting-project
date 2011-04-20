@@ -17,7 +17,6 @@
 
 		<form action="${pageContext.request.contextPath}${uri}" method="post">
 			<c:if test="${entity.id != null}">
-				<input type="hidden" name="entity.id" value="${entity.id}"/>
 				<input type="hidden" name="_method" value="put"/>
 			</c:if>
 
