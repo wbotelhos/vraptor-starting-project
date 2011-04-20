@@ -29,7 +29,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 			File image = new File(entity.getImagePath());
 
 			if (image.exists() && !image.delete()) {
-				throw new FileNotFoundException("Não foi possível apagar a imagem.");
+				throw new FileNotFoundException("erro.apagar.imagem");
 			}
 
 			entity.setImagem("default.jpg");
