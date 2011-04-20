@@ -65,6 +65,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 		try {
 			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
 		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 			throw new UploadException("caminho.destino.invalido");
 		} catch (IOException e) {
 			e.printStackTrace();
