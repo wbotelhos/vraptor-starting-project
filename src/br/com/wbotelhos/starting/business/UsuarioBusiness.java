@@ -1,6 +1,7 @@
 package br.com.wbotelhos.starting.business;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
 import br.com.caelum.vraptor.ioc.Component;
@@ -17,11 +18,15 @@ public class UsuarioBusiness extends GenericImageBusiness<Usuario, UsuarioImage>
 		super(manager);
 	}
 
-	public boolean isMailExist(Usuario entity) {
-		Query query = manager.createQuery("select id from Usuario where email = :email and (:id is null or id != :id)");
-		query.setParameter("email", entity.getEmail());
-		query.setParameter("id", entity.getId());
-		return (query.getSingleResult() == null) ? false : true;
+	public Boolean isMailExist(Usuario entity) {
+		try {
+			Query query = manager.createQuery("select id from Usuario where email = :email and (:id is null or id != :id)");
+			query.setParameter("email", entity.getEmail());
+			query.setParameter("id", entity.getId());
+			return (query.getSingleResult() != null);
+		} catch (NoResultException e) {
+			return false;
+		}
 	}
 
 	@Override
