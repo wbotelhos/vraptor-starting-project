@@ -7,6 +7,6 @@ import br.com.wbotelhos.starting.repository.common.GenericRepository;
 
 public interface UsuarioRepository extends GenericRepository<Usuario>, GenericImageRepository<Usuario, UsuarioImage> {
 
-	boolean isMailExist(Usuario entity);
+	Boolean isMailExist(Usuario entity);
 
 }
