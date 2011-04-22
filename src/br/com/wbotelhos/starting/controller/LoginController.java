@@ -6,7 +6,6 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.moviecollection.controller.IndexController;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.repository.LoginRepository;
