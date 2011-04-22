@@ -5,26 +5,26 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
-import br.com.wbotelhos.starting.business.LoginBusiness;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
+import br.com.wbotelhos.starting.repository.LoginRepository;
 
 @Resource
 public class LoginController {
 
 	private final Result result;
-	private final LoginBusiness loginBusiness;
+	private final LoginRepository repository;
 	private final UserSession userSession;
 
-	public LoginController(Result result, LoginBusiness loginBusiness, UserSession userSession) {
+	public LoginController(Result result, LoginRepository repository, UserSession userSession) {
 		this.result = result;
-		this.loginBusiness = loginBusiness;
+		this.repository = repository;
 		this.userSession = userSession;
 	}
 
 	@Post("/autenticar")
 	public void autenticar(Usuario entity) {
-		Usuario user = loginBusiness.autenticar(entity.getEmail(), entity.getSenha());
+		Usuario user = repository.autenticar(entity.getEmail(), entity.getSenha());
 
 		if (user != null) {
 			userSession.setUser(user);
