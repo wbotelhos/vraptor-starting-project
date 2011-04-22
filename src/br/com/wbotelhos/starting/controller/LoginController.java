@@ -1,10 +1,12 @@
 package br.com.wbotelhos.starting.controller;
 
+import static br.com.caelum.vraptor.view.Results.referer;
 import static br.com.wbotelhos.starting.util.Utils.i18n;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.moviecollection.controller.IndexController;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.repository.LoginRepository;
@@ -28,8 +30,12 @@ public class LoginController {
 
 		if (user != null) {
 			userSession.setUser(user);
-	
-			result.redirectTo(IndexController.class).index();
+
+			try {
+				result.use(referer()).redirect();
+			} catch (IllegalStateException e) {
+				result.redirectTo(IndexController.class).index();
+			}
 		} else {
 			result.include("error", i18n("email.senha.incorreta")).redirectTo(IndexController.class).index();
 		}
