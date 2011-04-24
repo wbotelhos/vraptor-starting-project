@@ -1,5 +1,8 @@
 package br.com.wbotelhos.starting.interceptor;
 
+import static br.com.caelum.vraptor.view.Results.http;
+import static br.com.wbotelhos.starting.util.Utils.i18n;
+
 import java.util.Arrays;
 
 import br.com.caelum.vraptor.Intercepts;
@@ -9,6 +12,7 @@ import br.com.caelum.vraptor.interceptor.Interceptor;
 import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.wbotelhos.starting.annotation.Permission;
 import br.com.wbotelhos.starting.component.UserSession;
+import br.com.wbotelhos.starting.controller.IndexController;
 import br.com.wbotelhos.starting.controller.UsuarioController;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
@@ -33,10 +37,18 @@ public class PermissionInterceptor implements Interceptor {
 		Permission controllerList = method.getResource().getType().getAnnotation(Permission.class);
 		Permission metodoList = method.getMethod().getAnnotation(Permission.class);
 
-		if (userSession.getUser() != null && this.isAcesso(metodoList) && this.isAcesso(controllerList)) {
+		Usuario user = userSession.getUser();
+
+		if (user == null) {
+			if (controllerList == null && metodoList == null) {
+				stack.next(method, resource);
+			} else {
+				result.redirectTo(IndexController.class).index();
+			}
+		} else if (this.isAcesso(metodoList) && this.isAcesso(controllerList)) {
 			stack.next(method, resource);
 		} else {
-			result.notFound();
+			result.use(http()).sendError(500, i18n("voce.nao.tem.permissao.para.tal.acao"));
 		}
 	}
 
