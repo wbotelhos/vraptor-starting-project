@@ -23,6 +23,14 @@ function confirmar(title, sim, nao, msg, funcao, largura, altura) {
 	.dialog('open');
 };
 
+function getError(xhr) {
+	var start	= xhr.responseText.indexOf('(') + 1,
+		end		= xhr.responseText.indexOf(')'),
+		error	= xhr.responseText.substring(start, end);
+
+	return error;
+};
+
 function mensagem(title, msg, largura, altura) {
 	$('div#mensagem').dialog({
 		'title': title,
