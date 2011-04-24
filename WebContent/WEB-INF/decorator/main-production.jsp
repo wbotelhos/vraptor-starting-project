@@ -54,6 +54,9 @@
 			};
 
 			$.ajaxSetup({
+				type: 'GET',
+				dataType: 'json',
+				jsonp: false,
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
 				error: function(xhr, status, error) {
 					mensagem('<fmt:message key="erro"/>', getError(xhr));
