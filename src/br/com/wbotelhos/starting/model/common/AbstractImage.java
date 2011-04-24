@@ -112,38 +112,40 @@ public abstract class AbstractImage extends AbstractEntity {
 			BufferedImage image = ImageIO.read(new File(path));
 
 			int type = (image.getTransparency() == Transparency.OPAQUE) ? BufferedImage.TYPE_INT_RGB : BufferedImage.TYPE_INT_ARGB;
-	
+
 			int imageWidth = image.getWidth();
 			int imageHeight = image.getHeight();
+
+			if (width < imageWidth || height < imageHeight) {
+				do {
+					if (imageWidth > width) {
+						imageWidth /= 2;
 	
-			do {
-				if (imageWidth > width) {
-					imageWidth /= 2;
-
-					if (imageWidth < width) {
-						imageWidth= width;
+						if (imageWidth < width) {
+							imageWidth= width;
+						}
 					}
-				}
 
-				if (imageHeight > height) {
-					imageHeight /= 2;
-
-					if (imageHeight < height) {
-						imageHeight= height;
+					if (imageHeight > height) {
+						imageHeight /= 2;
+	
+						if (imageHeight < height) {
+							imageHeight= height;
+						}
 					}
-				}
 
-				BufferedImage imageTemp = new BufferedImage(imageWidth, imageHeight, type);
-				Graphics2D graph = imageTemp.createGraphics();
-				graph.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
-				graph.drawImage(image, 0, 0, imageWidth, imageHeight, null);
-				graph.dispose();
-
-				image = imageTemp;
-			} while (imageWidth != width || imageHeight != height);
+					BufferedImage imageTemp = new BufferedImage(imageWidth, imageHeight, type);
+					Graphics2D graph = imageTemp.createGraphics();
+					graph.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
+					graph.drawImage(image, 0, 0, imageWidth, imageHeight, null);
+					graph.dispose();
+	
+					image = imageTemp;
+				} while (imageWidth != width || imageHeight != height);
+			}
 
 			ByteArrayOutputStream output = new ByteArrayOutputStream();
-	
+
 			ImageIO.write(image, "jpeg", output);
 
 			return new InputStreamDownload(new ByteArrayInputStream(output.toByteArray()), "image/jpeg", this.getDownloadFileName(path), false, output.size());
