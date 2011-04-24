@@ -8,6 +8,8 @@
 
 	<excludes>
 		<pattern>/*?exclude*</pattern>
+		<pattern>/404*</pattern>
+		<pattern>/500*</pattern>
 	</excludes>
 
 </decorators>
