@@ -10,10 +10,10 @@
 		Senha:	${item.senha} 
 		Perfil:	${item.perfil.label} 
 
-		(<a href="<c:url value='/usuario/${item.id}'/>">Exibir</a> |
-		<a href="<c:url value='/usuario/${item.id}/editar'/>">Editar</a>) 
+		(<a href="${pageContext.request.contextPath}/usuario/${item.id}">Exibir</a> |
+		<a href="${pageContext.request.contextPath}/usuario/${item.id}/editar">Editar</a>) 
 
-		<form action="<c:url value='/usuario/${item.id}'/>" method="post">
+		<form action="${pageContext.request.contextPath}/usuario/${item.id}" method="post">
 			<input type="hidden" name="_method" value="delete"/>
 
 			<input type="submit" value="Remover"/>
