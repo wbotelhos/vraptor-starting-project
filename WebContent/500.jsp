@@ -4,16 +4,16 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
-		<link type="image/x-icon" rel="shortcut icon" href="<c:url value='/favicon.ico'/>"/>
+		<link type="image/x-icon" rel="shortcut icon" href="${pageContext.request.contextPath}/favicon.ico"/>
 
 		<meta name="description" content="VRaptor Starting Project" />
 		<meta name="author" content="Washington Botelho dos Santos"/>
 		<meta name="keywords" content="vraptor,starting,project"/>
 
-		<link type="text/css" rel="stylesheet" href="<c:url value='/css/stylesheet.css'/>"/>
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/stylesheet.css"/>
 
-		<script type="text/javascript" src="<c:url value='/js/1-jquery-1.5.2.js'/>"></script>
-		<script type="text/javascript" src="<c:url value='/js/jquery-ui-1.8.11.js'/>"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/1-jquery-1.6.1rc1.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.11.js"></script>
 
 		<title><fmt:message key="erro"/> 500!</title>
 	</head>
