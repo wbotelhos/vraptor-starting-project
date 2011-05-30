@@ -12,8 +12,8 @@
 
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/stylesheet.css"/>
 
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/1-jquery-1.6.1rc1.js"></script>
-		<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.11.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/1-jquery-1.6.1rc1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.11.js"></script>
 
 		<title><fmt:message key="erro"/> 500!</title>
 	</head>
