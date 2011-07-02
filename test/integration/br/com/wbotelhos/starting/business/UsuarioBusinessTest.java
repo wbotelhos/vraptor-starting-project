@@ -1,4 +1,4 @@
-package integration.br.com.wbotelhos.business;
+package integration.br.com.wbotelhos.starting.business;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -33,9 +33,9 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaLoadAll() throws Exception {
+	public void shouldLoadAll() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when // then
 		when(manager.createQuery("from " + Usuario.class.getName())).thenReturn(query);
@@ -43,9 +43,9 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaLoadById() throws Exception {
+	public void shouldLoadById() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		repository.loadById(entity.getId());
@@ -55,9 +55,9 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaRemove() throws Exception {
+	public void shouldRemove() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		repository.remove(entity);
@@ -68,21 +68,22 @@ public class UsuarioBusinessTest {
 	}
 
 	@Test
-	public void deveriaSave() throws Exception {
+	public void shouldSave() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
-		repository.save(entity);
 		when(manager.merge(entity)).thenReturn(entity);
 
+		repository.save(entity);
+
 		// then
-		verify(manager).createQuery("select id from Usuario where email = :email and (:id is null or id != :id)");
+		verify(manager).createQuery("select id from " + Usuario.class.getName() + " where email = :email and (:id is null or id != :id)");
 		verify(query).setParameter("email", entity.getEmail());
 		verify(query).setParameter("id", entity.getId());
 	}
 
-	private void dadoQueTenhoUmUsuario() {
+	private void givenUser() {
 		entity = new Usuario();
 		entity.setId(42l);
 		entity.setNome("Washington Botelho");

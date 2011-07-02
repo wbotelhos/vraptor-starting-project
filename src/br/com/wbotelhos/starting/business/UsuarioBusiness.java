@@ -20,7 +20,7 @@ public class UsuarioBusiness extends GenericImageBusiness<Usuario, UsuarioImage>
 
 	public Boolean isMailExist(Usuario entity) {
 		try {
-			Query query = manager.createQuery("select id from Usuario where email = :email and (:id is null or id != :id)");
+			Query query = manager.createQuery("select id from " + Usuario.class.getName() + " where email = :email and (:id is null or id != :id)");
 			query.setParameter("email", entity.getEmail());
 			query.setParameter("id", entity.getId());
 			return (query.getSingleResult() != null);

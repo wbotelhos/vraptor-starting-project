@@ -42,9 +42,9 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaAtualizar() throws Exception {
+	public void shouldAtualizar() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.atualizar(entity);
@@ -55,9 +55,9 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaCriar() {
+	public void shouldCriar() {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.criar(entity);
@@ -68,9 +68,9 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaChamarFormularioDeEdicaoSemBuscarNoBanco() {
+	public void shouldChamarFormularioDeEdicaoSemBuscarNoBanco() {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.editar(entity);
@@ -81,7 +81,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaChamarFormularioDeEdicaoBuscandoNoaBanco() {
+	public void shouldChamarFormularioDeEdicaoBuscandoNoaBanco() {
 		// given
 		dadoQueReceboUmUsuarioSomenteComIDParaEditar();
 
@@ -96,9 +96,9 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaExibir() {
+	public void shouldExibir() {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.exibir(entity);
@@ -109,7 +109,7 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaListar() {
+	public void shouldListar() {
 		// given
 
 		// when
@@ -121,9 +121,9 @@ public class UsuarioControllerTest {
 	}
 
 	@Test
-	public void deveriaRemover() {
+	public void shouldRemover() {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.remover(entity);
@@ -134,9 +134,9 @@ public class UsuarioControllerTest {
 	}
 	
 	@Test
-	public void deveriaSalvar() throws Exception {
+	public void shouldSalvar() throws Exception {
 		// given
-		dadoQueTenhoUmUsuario();
+		givenUser();
 
 		// when
 		controller.salvar(entity);
@@ -148,7 +148,7 @@ public class UsuarioControllerTest {
 		verify(result).include("message", i18n("usuario.salvo.sucesso"));
 	}
 
-	private void dadoQueTenhoUmUsuario() {
+	private void givenUser() {
 		entity = new Usuario();
 		entity.setId(42l);
 		entity.setNome("Washington Botelho");

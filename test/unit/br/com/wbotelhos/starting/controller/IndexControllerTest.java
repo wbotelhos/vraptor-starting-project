@@ -29,7 +29,7 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void deveriaIndex() throws Exception {
+	public void shouldIndex() throws Exception {
 		// given
 
 		// when
@@ -40,7 +40,7 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void deveriaTranslateToEnglish() {
+	public void shouldTranslateToEnglish() {
 		// given
 		String expectedLanguage = "en";
 		String expectedCountry = "US";
@@ -54,7 +54,7 @@ public class IndexControllerTest {
 	}
 
 	@Test
-	public void deveriaTranslateToPortuguese() {
+	public void shouldTranslateToPortuguese() {
 		// given
 		String expectedLanguage = "pt";
 		String expectedCountry = "BR";
