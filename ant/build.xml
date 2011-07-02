@@ -94,17 +94,17 @@
 	</target>
 
 	<target name="rename" depends="minify">
-		<echo>Renomeando persistence...</echo>
-		<delete file="${dist.meta.dir}/persistence.xml" />
-		<copy file="${dist.meta.dir}/persistence-production.xml" tofile="${dist.meta.dir}/persistence.xml" />
-		<delete file="${dist.meta.dir}/persistence-production.xml" />
+		<echo>Renaming hibernate.properties...</echo>
+		<delete file="${dist.classes.dir}/hibernate.properties" />
+		<copy file="${dist.classes.dir}/hibernate-production.properties" tofile="${dist.classes.dir}/hibernate.properties" />
+		<delete file="${dist.classes.dir}/hibernate-production.properties" />
 
-		<echo>Renomeando log4j...</echo>
+		<echo>Renaming log4j.properties...</echo>
 		<delete file="${dist.classes.dir}/log4j.properties" />
 		<copy file="${dist.classes.dir}/log4j-production.properties" tofile="${dist.classes.dir}/log4j.properties" />
 		<delete file="${dist.classes.dir}/log4j-production.properties" />
 
-		<echo>Renomeando decorators...</echo>
+		<echo>Renaming decorators...</echo>
 		<delete file="${dist.webinf.dir}/decorator/main.jsp" />
 		<copy file="${dist.webinf.dir}/decorator/main-production.jsp" tofile="${dist.webinf.dir}/decorator/main.jsp" />
 		<delete file="${dist.webinf.dir}/decorator/main-production.jsp" />
