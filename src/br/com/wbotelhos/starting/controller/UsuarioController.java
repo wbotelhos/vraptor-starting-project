@@ -12,6 +12,7 @@ import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.interceptor.download.InputStreamDownload;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
+import br.com.wbotelhos.starting.annotation.Permission;
 import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.Usuario;
@@ -21,6 +22,7 @@ import br.com.wbotelhos.starting.repository.UsuarioRepository;
 import br.com.wbotelhos.starting.util.Image;
 
 @Resource
+@Permission({ TipoPerfil.MEMBRO, TipoPerfil.MODERADOR, TipoPerfil.ADMINISTRADOR })
 public class UsuarioController {
 
 	private final Result result;
