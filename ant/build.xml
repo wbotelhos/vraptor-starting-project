@@ -100,9 +100,9 @@
 		<delete file="${dist.meta.dir}/persistence-production.xml" />
 
 		<echo>Renomeando log4j...</echo>
-		<delete file="${dist.classes.dir}/log4j.xml" />
-		<copy file="${dist.classes.dir}/log4j-production.xml" tofile="${dist.classes.dir}/log4j.xml" />
-		<delete file="${dist.classes.dir}/log4j-production.xml" />
+		<delete file="${dist.classes.dir}/log4j.properties" />
+		<copy file="${dist.classes.dir}/log4j-production.properties" tofile="${dist.classes.dir}/log4j.properties" />
+		<delete file="${dist.classes.dir}/log4j-production.properties" />
 
 		<echo>Renomeando decorators...</echo>
 		<delete file="${dist.webinf.dir}/decorator/main.jsp" />
