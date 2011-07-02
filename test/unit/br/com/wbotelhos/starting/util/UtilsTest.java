@@ -1,8 +1,10 @@
-package br.com.wbotelhos.starting.util;
+package unit.br.com.wbotelhos.starting.util;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import br.com.wbotelhos.starting.util.Utils;
 
 public class UtilsTest {
 

@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.business;
+package integration.br.com.wbotelhos.business;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;

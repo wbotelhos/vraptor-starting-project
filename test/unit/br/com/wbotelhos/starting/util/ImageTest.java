@@ -1,10 +1,12 @@
-package br.com.wbotelhos.starting.util;
+package unit.br.com.wbotelhos.starting.util;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
+
+import br.com.wbotelhos.starting.util.Image;
 
 public class ImageTest {
 

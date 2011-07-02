@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.controller;
+package unit.br.com.wbotelhos.starting.controller;
 
 import static br.com.wbotelhos.starting.util.Utils.i18n;
 import static org.mockito.Mockito.verify;
@@ -19,6 +19,7 @@ import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockLocalization;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
+import br.com.wbotelhos.starting.controller.UsuarioController;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
