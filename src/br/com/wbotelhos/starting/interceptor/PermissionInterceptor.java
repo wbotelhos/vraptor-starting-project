@@ -4,6 +4,7 @@ import static br.com.caelum.vraptor.view.Results.http;
 import static br.com.wbotelhos.starting.util.Utils.i18n;
 
 import java.util.Arrays;
+import java.util.Collection;
 
 import br.com.caelum.vraptor.Intercepts;
 import br.com.caelum.vraptor.Result;
@@ -59,13 +60,9 @@ public class PermissionInterceptor implements Interceptor {
 
 		Usuario user = userSession.getUser();
 
-		for (TipoPerfil perfil : permissaoList.value()) {
-			if (perfil.equals(user.getPerfil())) {
-				return true;
-			}
-		}		
+		Collection<TipoPerfil> perfilList = Arrays.asList(permissaoList.value());
 
-		return false;
+		return perfilList.contains(user.getPerfil());
 	}
 
 }
