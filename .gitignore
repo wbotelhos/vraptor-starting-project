@@ -1,5 +1,5 @@
 classes
-dist
+target
 WebContent/WEB-INF/classes
 
 .DS_Store
