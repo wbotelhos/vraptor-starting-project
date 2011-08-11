@@ -1,10 +1,10 @@
-# VRaptor Starting Project
+# VRaptor Starting Project http://wbotelhos.com.br
 
-VRaptor starting project ready to use. 
+A project pre-configured to help you save time! 
 
 ## License
 
-This article is licensed under [The MIT License](http://www.opensource.org/licenses/mit-license.php)
+This project is licensed under [The MIT License](http://www.opensource.org/licenses/mit-license.php)
 
 ## Author
 
