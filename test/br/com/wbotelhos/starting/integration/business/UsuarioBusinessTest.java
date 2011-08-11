@@ -49,9 +49,9 @@ public class UsuarioBusinessTest {
 
 	@After
 	public void tearDown() {
+		JPAHelper.close();
 		dbUnitHelper.deleteAll(DATASET_USUARIO_IMAGE);
 		dbUnitHelper.deleteAll(DATASET_USUARIO);
-		JPAHelper.close();
 	}
 
 	@Test
@@ -97,7 +97,7 @@ public class UsuarioBusinessTest {
 		verificarEntities(expected, found);
 	}
 
-	//@Test
+	@Test
 	public void deveriaAtualizar() throws CommonException {
 		// given
 		Usuario altered = repository.loadById(ID_VALIDO);
@@ -109,7 +109,7 @@ public class UsuarioBusinessTest {
 		altered.setPerfil(TipoPerfil.MEMBRO);
 		altered.setSenha("nova-senha");
 
-		repository.save(altered); // Fuck!!!
+		repository.save(altered);
 
 		Usuario found = repository.loadById(ID_VALIDO);
 
