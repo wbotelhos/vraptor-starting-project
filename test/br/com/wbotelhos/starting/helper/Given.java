@@ -27,18 +27,18 @@ public class Given {
 	}
 
 	public static Usuario usuario(Long id, String email, String nome, String imagem, TipoPerfil perfil, String senha, List<UsuarioImage> imageList) {
-		Usuario exame = new Usuario();
+		Usuario usuario = new Usuario();
 
-		exame.setId(id);
-		exame.setEmail(email);
-		exame.setImagem(imagem);
-		exame.setNome(nome);
-		exame.setPerfil(perfil);
-		exame.setSenha(senha);
+		usuario.setId(id);
+		usuario.setEmail(email);
+		usuario.setImagem(imagem);
+		usuario.setNome(nome);
+		usuario.setPerfil(perfil);
+		usuario.setSenha(senha);
 
-		exame.setImageList(imageList);
+		usuario.setImageList(imageList);
 
-		return exame;
+		return usuario;
 	}
 
 	/**
