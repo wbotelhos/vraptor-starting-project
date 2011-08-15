@@ -46,14 +46,14 @@ public class PermissionInterceptor implements Interceptor {
 			} else {
 				result.redirectTo(IndexController.class).index();
 			}
-		} else if (this.isAcesso(metodoList) && this.isAcesso(controllerList)) {
+		} else if (this.hasAccess(metodoList) && this.hasAccess(controllerList)) {
 			stack.next(method, resource);
 		} else {
 			result.use(http()).sendError(500, i18n("voce.nao.tem.permissao.para.tal.acao"));
 		}
 	}
 
-	private boolean isAcesso(Permission permissaoList) {
+	private boolean hasAccess(Permission permissaoList) {
 		if (permissaoList == null) {
 			return true;
 		}
