@@ -54,7 +54,7 @@
 			};
 
 			$.ajaxSetup({
-				type: 'GET',
+				type: 'get',
 				dataType: 'json',
 				jsonp: false,
 				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
