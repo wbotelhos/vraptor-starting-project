@@ -120,24 +120,22 @@ public class UsuarioController {
 		result.redirectTo(this).exibir(entity);
 	}
 
-	@Get("/usuario/{entity.id}/image/{width}/{height}")
-	public InputStreamDownload viewThumb(Usuario entity, int width, int height) {
-		entity = repository.loadById(entity.getId());
-		return entity.getThumb(entity.getImagePath(), width, height);
+	@Get("/usuario/{entity.id}/thumb")
+	public InputStreamDownload viewThumb(Usuario entity) {
+		return repository.loadById(entity.getId()).getThumb();
 	}
 
 	@Get("/usuario/{entity.id}/image")
 	public InputStreamDownload viewImage(Usuario entity) {
-		entity = repository.loadById(entity.getId());
-		return entity.getImage(entity.getImagePath());
+		return repository.loadById(entity.getId()).getImage();
 	}
 
-	@Get("/usuario/{entity.id}/gallery/{width}/{height}/{fileName}")
-	public InputStreamDownload viewThumbGallery(Usuario entity, int width, int height, String fileName) {
-		return entity.getThumbGallery(fileName, width, height);
+	@Get("/usuario/{entity.id}/gallery/{fileName}/thumb")
+	public InputStreamDownload viewThumbGallery(Usuario entity, String fileName) {
+		return entity.getThumbGallery(fileName);
 	}
 
-	@Get("/usuario/{entity.id}/gallery/{fileName}")
+	@Get("/usuario/{entity.id}/gallery/{fileName}/image")
 	public InputStreamDownload viewImageGallery(Usuario entity, String fileName) {
 		return entity.getImageGallery(fileName);
 	}

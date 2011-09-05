@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import org.apache.commons.io.IOUtils;
 
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
+import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.common.AbstractImage;
 import br.com.wbotelhos.starting.model.common.AbstractImageGallery;
@@ -23,13 +24,13 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 		super(manager);
 	}
 
-	public void removeImage(T entity) throws FileNotFoundException {
-		if (!entity.hasImageDefault()) {
+	public void removeImage(T entity) throws CommonException {
+		if (!entity.hasDefaultImage()) {
 
 			File image = new File(entity.getImagePath());
 
 			if (image.exists() && !image.delete()) {
-				throw new FileNotFoundException("erro.apagar.imagem");
+				throw new CommonException("erro.apagar.imagem");
 			}
 
 			entity.setImagem("default.jpg");
@@ -54,7 +55,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 
 		entity.setImagem(entity.getId() + extension);
 
-		File folder = new File(entity.getFolderPath());
+		File folder = new File(entity.getImageFolderPath());
 
 		if (!folder.exists()) {
 			folder.mkdirs();
@@ -64,6 +65,8 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 
 		try {
 			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
+
+			entity.resize(file.getPath(), 200, 200);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw new UploadException("caminho.destino.invalido");
@@ -80,7 +83,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 
 		entityImage.setImagem(System.currentTimeMillis() + extension);
 
-		File folder = new File(entity.getFolderPath(), entity.getId().toString());
+		File folder = new File(entity.getImageFolderPath(), entity.getId().toString());
 
 		if (!folder.exists()) {
 			folder.mkdirs();
@@ -90,6 +93,8 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 
 		try {
 			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
+
+			entity.resize(file.getPath(), 200, 200);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 			throw new UploadException("caminho.destino.invalido");

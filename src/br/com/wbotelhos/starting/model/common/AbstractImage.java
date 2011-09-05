@@ -4,12 +4,12 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.imageio.ImageIO;
 import javax.persistence.MappedSuperclass;
@@ -22,8 +22,9 @@ public abstract class AbstractImage extends AbstractEntity {
 	private static final long serialVersionUID = 7003348999944464969L;
 
 	private static final String IMAGE_DEFAULT = "default.jpg"; 
-	private static final String IMAGE_NOT_FOUND = "not-found.jpg"; 
-	public static final String IMAGE_PATH = System.getProperty("user.home") + File.separator + "starting" + File.separator + "img";
+	private static final String IMAGE_NOT_FOUND = "not-found.png";
+	private static final String THUMB_FOLDER = "thumb";
+	public static final String IMAGE_PATH = System.getProperty("user.home") + File.separator + "startig" + File.separator + "img";
 
 	private String imagem;
 
@@ -37,52 +38,100 @@ public abstract class AbstractImage extends AbstractEntity {
 
 	public abstract String getFolderName();
 
-	public String getFolderPath() {
+	/** IMAGE **/
+	public String getImageFolderPath() {																	// filme
 		return IMAGE_PATH + File.separator + this.getFolderName();
 	}
 
-	public String getThumbPath() {
-		return this.getFolderPath() + File.separator + this.getImagem();
+	public String getImagePath() {																			// filme/1.jpg
+		return this.getImageFolderPath() + File.separator + this.getImagem();
 	}
 
-	public String getImagePath() {
-		return this.getFolderPath() + File.separator + this.getImagem();
+	public InputStreamDownload getImage() {																	// File(filme/1.jpg)
+		return this.getStream(this.getImagePath());
 	}
 
-	public String getDownloadFileName() {
-		return (this.getImagem() == null) ? null : this.getImagem().substring(0, this.getImagem().indexOf("."));
+	/* thumb */
+	public String getThumbFolderPath() {																	// filme/thumb
+		return this.getImageFolderPath() + File.separator + THUMB_FOLDER;
+	}
+	
+	public String getThumbPath() {																			// filme/thumb/1.jpg
+		return this.getThumbFolderPath() + File.separator + this.getImagem();
 	}
 
-	public boolean hasImageDefault() {
+
+	public InputStreamDownload getThumb() {																	// File(filme/thumb/1.jpg)
+		return this.getStream(this.getThumbPath());
+	}
+
+	/** GALLERY **/
+	public String getImageGalleryFolderPath() {																// filme/1
+		return this.getImageFolderPath() + File.separator + this.getId();
+	}
+
+	public String getImageGalleryPath(String fileName) {													// filme/1/1.jpg
+		return this.getImageGalleryFolderPath() + File.separator + fileName;
+	}
+
+	public InputStreamDownload getImageGallery(String fileName) {											// File(filme/1/1.jpg)
+		return this.getStream(this.getImageGalleryFolderPath() + File.separator + fileName);
+	}
+
+	/* thumb */
+	public String getThumbGalleryFolderPath() {																// filme/thumb/1
+		return this.getImageFolderPath() + File.separator + THUMB_FOLDER + File.separator + this.getId();
+	}
+
+	public String getThumbGalleryPath(String fileName) {													// filme/thumb/1/1.jpg
+		return this.getThumbGalleryFolderPath() + File.separator + fileName;
+	}
+
+	public InputStreamDownload getThumbGallery(String fileName) {											// File(filme/thumb/1/1.jpg)
+		return this.getStream(this.getThumbGalleryFolderPath() + File.separator + fileName);
+	}
+
+	/* default image */
+	public InputStreamDownload getDefaultImage() {
+		return this.getStream(this.getImageFolderPath() + File.separator + IMAGE_DEFAULT);
+	}
+
+	public boolean hasDefaultImage() {
 		return this.getImagem().equalsIgnoreCase(IMAGE_DEFAULT);
 	}
 
-	public InputStreamDownload getThumbGallery(String fileName, int width, int height) {
-		return this.getThumb(this.getFolderPath() + File.separator + this.getId().toString() + File.separator + fileName, width, height);
+	/* default image */
+	protected String getDownloadFileName() {
+		return (this.getImagem() == null) ? null : this.getImagem().substring(0, this.getImagem().indexOf("."));
 	}
 
-	public InputStreamDownload getImageGallery(String fileName) {
-		return this.getImage(this.getFolderPath() + File.separator + this.getId().toString() + File.separator + fileName);
+	private String getDownloadFileName(File file) {
+		String fileName = this.getDownloadFileName();
+
+		return (fileName == null) ? "default.jpg" : fileName;
 	}
 
-	public InputStreamDownload getImageDefault() {
-		File file = new File(IMAGE_PATH + File.separator + this.getFolderName(), IMAGE_DEFAULT);
+	private InputStreamDownload getStream(String path) {
+		File file = new File(path);
+
+		if (!file.exists()) {
+			if (file.getName().endsWith(IMAGE_DEFAULT)) {
+				return this.getNotFoundImage();
+			}
+
+			return this.getDefaultImage();
+		}
 
 		try {
-			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", IMAGE_DEFAULT, false, file.length());
+			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", this.getDownloadFileName(file), false, file.length());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return this.getImageNotFound();
+			return this.getNotFoundImage();
 		}
 	}
 
-	private String getDownloadFileName(String path) {
-		File file = new File(path);
-		return (this.getDownloadFileName() == null) ? file.getName() : this.getDownloadFileName();
-	}
-
-	public InputStreamDownload getImageNotFound() {
-		File file = new File(IMAGE_PATH + File.separator + this.getFolderName(), IMAGE_NOT_FOUND);
+	public InputStreamDownload getNotFoundImage() {
+		File file = new File(IMAGE_PATH, IMAGE_NOT_FOUND);
 
 		try {
 			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", IMAGE_NOT_FOUND, false, file.length());
@@ -92,22 +141,7 @@ public abstract class AbstractImage extends AbstractEntity {
 		}
 	}
 
-	public InputStreamDownload getImage(String path) {
-		File file = new File(path);
-
-		if (!file.exists() || file.getName().endsWith(IMAGE_DEFAULT)) {
-			return this.getImageDefault();
-		}
-
-		try {
-			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", this.getDownloadFileName(path), false, file.length());
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return this.getImageNotFound();
-		}
-	}
-
-	public InputStreamDownload getThumb(String path, int width, int height) {
+	public void resize(String path, int width, int height) {
 		try {
 			BufferedImage image = ImageIO.read(new File(path));
 
@@ -144,14 +178,9 @@ public abstract class AbstractImage extends AbstractEntity {
 				} while (imageWidth != width || imageHeight != height);
 			}
 
-			ByteArrayOutputStream output = new ByteArrayOutputStream();
-
-			ImageIO.write(image, "jpeg", output);
-
-			return new InputStreamDownload(new ByteArrayInputStream(output.toByteArray()), "image/jpeg", this.getDownloadFileName(path), false, output.size());
+			ImageIO.write(image, "jpeg", new File(this.getThumbPath()));
 		} catch (IOException e) {
-			e.printStackTrace();
-			return this.getImageNotFound();
+			System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()).toString() + "[ERROR] " + e.getMessage());
 		}
 	}
 
