@@ -35,32 +35,32 @@ public class PermissionInterceptor implements Interceptor {
 	}
 
 	public void intercept(InterceptorStack stack, ResourceMethod method, Object resource) {
-		Permission controllerList = method.getResource().getType().getAnnotation(Permission.class);
-		Permission metodoList = method.getMethod().getAnnotation(Permission.class);
+		Permission methodPermission = method.getMethod().getAnnotation(Permission.class);
+		Permission controllerPermission = method.getResource().getType().getAnnotation(Permission.class);
 
 		Usuario user = userSession.getUser();
 
 		if (user == null) {
-			if (controllerList == null && metodoList == null) {
+			if (methodPermission == null && controllerPermission == null) {
 				stack.next(method, resource);
 			} else {
 				result.redirectTo(IndexController.class).index();
 			}
-		} else if (this.hasAccess(metodoList) && this.hasAccess(controllerList)) {
+		} else if (this.hasAccess(methodPermission) && this.hasAccess(controllerPermission)) {
 			stack.next(method, resource);
 		} else {
 			result.use(http()).sendError(500, i18n("voce.nao.tem.permissao.para.tal.acao"));
 		}
 	}
 
-	private boolean hasAccess(Permission permissaoList) {
-		if (permissaoList == null) {
+	private boolean hasAccess(Permission permission) {
+		if (permission == null) {
 			return true;
 		}
 
 		Usuario user = userSession.getUser();
 
-		Collection<TipoPerfil> perfilList = Arrays.asList(permissaoList.value());
+		Collection<TipoPerfil> perfilList = Arrays.asList(permission.value());
 
 		return perfilList.contains(user.getPerfil());
 	}
