@@ -14,7 +14,7 @@ import br.com.caelum.vraptor.resource.ResourceMethod;
 import br.com.wbotelhos.starting.annotation.Permission;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.controller.IndexController;
-import br.com.wbotelhos.starting.controller.UsuarioController;
+import br.com.wbotelhos.starting.controller.LoginController;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 
@@ -31,7 +31,7 @@ public class PermissionInterceptor implements Interceptor {
 
 	@SuppressWarnings("unchecked")
 	public boolean accepts(ResourceMethod method) {
-		return Arrays.asList(UsuarioController.class).contains(method.getMethod().getDeclaringClass());
+		return !Arrays.asList(IndexController.class, LoginController.class).contains(method.getMethod().getDeclaringClass());
 	}
 
 	public void intercept(InterceptorStack stack, ResourceMethod method, Object resource) {
@@ -41,11 +41,7 @@ public class PermissionInterceptor implements Interceptor {
 		Usuario user = userSession.getUser();
 
 		if (user == null) {
-			if (methodPermission == null && controllerPermission == null) {
-				stack.next(method, resource);
-			} else {
-				result.redirectTo(IndexController.class).index();
-			}
+			result.redirectTo(IndexController.class).index();
 		} else if (this.hasAccess(methodPermission) && this.hasAccess(controllerPermission)) {
 			stack.next(method, resource);
 		} else {
