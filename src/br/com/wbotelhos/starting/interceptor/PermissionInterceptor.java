@@ -15,7 +15,6 @@ import br.com.wbotelhos.starting.annotation.Permission;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.controller.IndexController;
 import br.com.wbotelhos.starting.controller.LoginController;
-import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.common.TipoPerfil;
 
 @Intercepts
@@ -35,17 +34,17 @@ public class PermissionInterceptor implements Interceptor {
 	}
 
 	public void intercept(InterceptorStack stack, ResourceMethod method, Object resource) {
-		Permission methodPermission = method.getMethod().getAnnotation(Permission.class);
-		Permission controllerPermission = method.getResource().getType().getAnnotation(Permission.class);
-
-		Usuario user = userSession.getUser();
-
-		if (user == null) {
+		if (!userSession.isLogged()) {
 			result.redirectTo(IndexController.class).index();
-		} else if (this.hasAccess(methodPermission) && this.hasAccess(controllerPermission)) {
-			stack.next(method, resource);
 		} else {
-			result.use(http()).sendError(500, i18n("voce.nao.tem.permissao.para.tal.acao"));
+			Permission methodPermission = method.getMethod().getAnnotation(Permission.class);
+			Permission controllerPermission = method.getResource().getType().getAnnotation(Permission.class);
+
+			if (this.hasAccess(methodPermission) && this.hasAccess(controllerPermission)) {
+				stack.next(method, resource);
+			} else {
+				result.use(http()).sendError(500, i18n("voce.nao.tem.permissao.para.tal.acao"));
+			}
 		}
 	}
 
@@ -54,11 +53,9 @@ public class PermissionInterceptor implements Interceptor {
 			return true;
 		}
 
-		Usuario user = userSession.getUser();
-
 		Collection<TipoPerfil> perfilList = Arrays.asList(permission.value());
 
-		return perfilList.contains(user.getPerfil());
+		return perfilList.contains(userSession.getUser().getPerfil());
 	}
 
 }
