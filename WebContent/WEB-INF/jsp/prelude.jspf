@@ -3,5 +3,3 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 
 <fmt:setLocale value="${userSession.language}" scope="session" />
-
-<fmt:setBundle basename="messages" />
