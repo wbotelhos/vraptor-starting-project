@@ -1,6 +1,10 @@
 package br.com.wbotelhos.starting.controller;
 
+import static br.com.caelum.vraptor.view.Results.referer;
 import static br.com.wbotelhos.starting.util.Utils.i18n;
+
+import java.util.Locale;
+
 import br.com.caelum.vraptor.Delete;
 import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
@@ -13,6 +17,7 @@ import br.com.caelum.vraptor.interceptor.download.InputStreamDownload;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.wbotelhos.starting.annotation.Permission;
+import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.Usuario;
@@ -27,12 +32,14 @@ public class UsuarioController {
 
 	private final Result result;
 	private final UsuarioRepository repository;
+	private final UserSession userSession;
 	private final Validator validator;
 	private final Localization localization;
 
-	public UsuarioController(Result result, UsuarioRepository repository, Validator validator, Localization localization) {
+	public UsuarioController(Result result, UsuarioRepository repository, UserSession userSession, Validator validator, Localization localization) {
 		this.result = result;
 		this.repository = repository;
+		this.userSession = userSession;
 		this.validator = validator;
 		this.localization = localization;
 	}
@@ -100,6 +107,19 @@ public class UsuarioController {
 			result.include("message", i18n("usuario.salvo.sucesso")).redirectTo(this).exibir(entity);
 		} catch (CommonException e) {
 			result.include("error", i18n(e.getMessage())).redirectTo(this).criar(entity);
+		}
+	}
+
+	@Get("/translate/{language}/{country}")
+	public void translateTo(String language, String country) {
+		try {
+			Locale.setDefault(new Locale(language, country));
+
+			userSession.setLanguage(language + "_" + country.toUpperCase());
+
+		    result.use(referer()).redirect();
+		} catch (IllegalStateException e) {
+		    result.redirectTo(IndexController.class).index();
 		}
 	}
 

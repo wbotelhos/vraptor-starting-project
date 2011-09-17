@@ -1,8 +1,5 @@
 package br.com.wbotelhos.starting.unit.controller;
 
-import java.util.Locale;
-
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -37,34 +34,6 @@ public class IndexControllerTest {
 
 		// then
 
-	}
-
-	@Test
-	public void shouldTranslateToEnglish() {
-		// given
-		String expectedLanguage = "en";
-		String expectedCountry = "US";
-
-		// when
-		controller.translateTo(expectedLanguage, expectedCountry);
-
-		// then
-		Assert.assertEquals("Language is different", expectedLanguage, Locale.getDefault().getLanguage());
-		Assert.assertEquals("Country is different", expectedCountry, Locale.getDefault().getCountry());
-	}
-
-	@Test
-	public void shouldTranslateToPortuguese() {
-		// given
-		String expectedLanguage = "pt";
-		String expectedCountry = "BR";
-
-		// when
-		controller.translateTo(expectedLanguage, expectedCountry);
-
-		// then
-		Assert.assertEquals("Language is different", expectedLanguage, Locale.getDefault().getLanguage());
-		Assert.assertEquals("Country is different", expectedCountry, Locale.getDefault().getCountry());
 	}
 
 }

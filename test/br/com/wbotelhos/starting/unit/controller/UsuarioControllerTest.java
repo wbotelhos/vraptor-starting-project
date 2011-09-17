@@ -4,6 +4,7 @@ import static br.com.wbotelhos.starting.util.Utils.i18n;
 import static org.mockito.Mockito.verify;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import junit.framework.Assert;
 
@@ -19,6 +20,7 @@ import br.com.caelum.vraptor.core.Localization;
 import br.com.caelum.vraptor.util.test.MockLocalization;
 import br.com.caelum.vraptor.util.test.MockResult;
 import br.com.caelum.vraptor.util.test.MockValidator;
+import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.controller.UsuarioController;
 import br.com.wbotelhos.starting.helper.Given;
 import br.com.wbotelhos.starting.model.Usuario;
@@ -35,12 +37,13 @@ public class UsuarioControllerTest {
 	@Spy private Validator validator = new MockValidator();
 	@Spy private Localization localization = new MockLocalization();
 
+	@Mock private UserSession userSession;
 	@Mock private UsuarioRepository repository;
 
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
-		controller = new UsuarioController(result, repository, validator, localization);
+		controller = new UsuarioController(result, repository, userSession, validator, localization);
 	}
 
 	@Test
@@ -148,6 +151,34 @@ public class UsuarioControllerTest {
 
 		verify(repository).save(entity);
 		verify(result).include("message", i18n("usuario.salvo.sucesso"));
+	}
+
+	@Test
+	public void shouldTranslateToEnglish() {
+		// given
+		String expectedLanguage = "en";
+		String expectedCountry = "US";
+
+		// when
+		controller.translateTo(expectedLanguage, expectedCountry);
+
+		// then
+		Assert.assertEquals("Language is different", expectedLanguage, Locale.getDefault().getLanguage());
+		Assert.assertEquals("Country is different", expectedCountry, Locale.getDefault().getCountry());
+	}
+
+	@Test
+	public void shouldTranslateToPortuguese() {
+		// given
+		String expectedLanguage = "pt";
+		String expectedCountry = "BR";
+
+		// when
+		controller.translateTo(expectedLanguage, expectedCountry);
+
+		// then
+		Assert.assertEquals("Language is different", expectedLanguage, Locale.getDefault().getLanguage());
+		Assert.assertEquals("Country is different", expectedCountry, Locale.getDefault().getCountry());
 	}
 
 	private Usuario dadoQueReceboUmUsuarioSomenteComIDParaEditar() {
