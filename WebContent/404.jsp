@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 
 <html>
@@ -12,7 +12,7 @@
 
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/stylesheet.css"/>
 
-		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/1-jquery-1.6.1rc1.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/1-jquery-1.6.4.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.11.js"></script>
 
 		<title><fmt:message key="erro"/> 404!</title>

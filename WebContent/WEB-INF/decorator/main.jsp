@@ -14,7 +14,7 @@
 
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/css/stylesheet.css"/>
 
-		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/1-jquery-1.6.2.min.js"></script>
+		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/1-jquery-1.6.4.min.js"></script>
 		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/jquery-ui-1.8.11.js"></script>
 		<script type="text/javascript" charset="utf-8" src="${pageContext.request.contextPath}/js/jquery.colorbox-1.3.16.min.js"></script>
 
@@ -60,8 +60,7 @@
 			$.ajaxSetup({
 				type: 'get',
 				dataType: 'json',
-				jsonp: false,
-				contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+				contentType: 'application/json; charset=utf-8',
 				error: function(xhr, status, error) {
 					mensagem('<fmt:message key="erro"/>', getError(xhr));
 				}
