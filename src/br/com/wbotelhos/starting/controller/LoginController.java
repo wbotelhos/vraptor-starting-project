@@ -6,6 +6,7 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.wbotelhos.starting.annotation.Public;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.repository.LoginRepository;
@@ -23,6 +24,7 @@ public class LoginController {
 		this.userSession = userSession;
 	}
 
+	@Public
 	@Post("/autenticar")
 	public void autenticar(Usuario entity) {
 		Usuario user = repository.autenticar(entity.getEmail(), entity.getSenha());

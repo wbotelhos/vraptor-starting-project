@@ -8,8 +8,10 @@ import br.com.caelum.vraptor.Get;
 import br.com.caelum.vraptor.Path;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
+import br.com.wbotelhos.starting.annotation.Public;
 import br.com.wbotelhos.starting.component.UserSession;
 
+@Public
 @Resource
 public class IndexController {
 
