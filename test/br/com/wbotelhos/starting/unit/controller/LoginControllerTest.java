@@ -1,5 +1,6 @@
 package br.com.wbotelhos.starting.unit.controller;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -25,10 +26,10 @@ import br.com.wbotelhos.starting.repository.LoginRepository;
 public class LoginControllerTest {
 
 	private LoginController controller;
+	private UserSession userSession = new UserSession();
 
 	@Spy private Result result = new MockResult();
 
-	@Mock private UserSession userSession;
 	@Mock private LoginRepository repository;
 
 	@Before
@@ -51,7 +52,10 @@ public class LoginControllerTest {
 
 		// then
 		verify(repository).autenticar(entity.getEmail(), entity.getSenha());
-		assertFalse("nao deve haver error", result.included().containsKey("error"));
+
+		assertTrue("deve haver usuario na sessao", userSession.isLogged());
+		assertEquals("deve ser o usuario correto", entity.getEmail(), userSession.getUser().getEmail());
+		assertFalse("nao deve haver mensagem de error", result.included().containsKey("error"));
 	}
 
 	@Test
@@ -68,20 +72,21 @@ public class LoginControllerTest {
 
 		// then
 		verify(repository).autenticar(entity.getEmail(), entity.getSenha());
-		assertTrue("nao deve haver error", result.included().containsKey("error"));
+
+		assertFalse("nao deve haver usuario na sessao", userSession.isLogged());
+		assertTrue("deve haver mensagem de error", result.included().containsKey("error"));
 	}
 
-	//@Test // TODO: mockar o UserSession.
+	@Test
 	public void deveriaLogout() {
 		// given
-		Usuario user = new Usuario();
-		Mockito.when(userSession.getUser()).thenReturn(user);
+		userSession.setUser(new Usuario());
 
 		// when
 		controller.logout();
 
 		// then
-		assertTrue("nao deve haver usuario na sessao", userSession.getUser() == null);
+		assertFalse("nao deve haver usuario na sessao", userSession.isLogged());
 	}
 
 	@Test
