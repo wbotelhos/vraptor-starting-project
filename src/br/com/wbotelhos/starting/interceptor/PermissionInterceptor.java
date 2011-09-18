@@ -15,7 +15,7 @@ import br.com.wbotelhos.starting.annotation.Permission;
 import br.com.wbotelhos.starting.annotation.Public;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.controller.IndexController;
-import br.com.wbotelhos.starting.model.common.TipoPerfil;
+import br.com.wbotelhos.starting.model.common.Perfil;
 
 @Intercepts
 public class PermissionInterceptor implements Interceptor {
@@ -52,7 +52,7 @@ public class PermissionInterceptor implements Interceptor {
 			return true;
 		}
 
-		Collection<TipoPerfil> perfilList = Arrays.asList(permission.value());
+		Collection<Perfil> perfilList = Arrays.asList(permission.value());
 
 		return perfilList.contains(userSession.getUser().getPerfil());
 	}

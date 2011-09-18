@@ -20,7 +20,7 @@ import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.helper.Given;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.UsuarioImage;
-import br.com.wbotelhos.starting.model.common.TipoPerfil;
+import br.com.wbotelhos.starting.model.common.Perfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 
 public class UsuarioBusinessTest {
@@ -64,9 +64,9 @@ public class UsuarioBusinessTest {
 		// then
 		assertEquals("numero de registros encontrados", 3, entityList.size());
 
-		verificarEntity(1l, "email_1@gmail.com", "imagem-1.jpg", "nome-1", TipoPerfil.MEMBRO, "senha-1", entityList.get(0));
-		verificarEntity(2l, "email_2@gmail.com", "imagem-2.jpg", "nome-2", TipoPerfil.MODERADOR, "senha-2", entityList.get(1));
-		verificarEntity(3l, "email_3@gmail.com", "imagem-3.jpg", "nome-3", TipoPerfil.ADMINISTRADOR, "senha-3", entityList.get(2));
+		verificarEntity(1l, "email_1@gmail.com", "imagem-1.jpg", "nome-1", Perfil.MEMBRO, "senha-1", entityList.get(0));
+		verificarEntity(2l, "email_2@gmail.com", "imagem-2.jpg", "nome-2", Perfil.MODERADOR, "senha-2", entityList.get(1));
+		verificarEntity(3l, "email_3@gmail.com", "imagem-3.jpg", "nome-3", Perfil.ADMINISTRADOR, "senha-3", entityList.get(2));
 	}
 
 	@Test
@@ -78,13 +78,13 @@ public class UsuarioBusinessTest {
 		assertNotNull("usuario encontrado", found);
 
 		// then
-		verificarEntity(1l, "email_1@gmail.com", "imagem-1.jpg", "nome-1", TipoPerfil.MEMBRO, "senha-1", found);
+		verificarEntity(1l, "email_1@gmail.com", "imagem-1.jpg", "nome-1", Perfil.MEMBRO, "senha-1", found);
 	}
 
 	@Test
 	public void deveriaSalvar() throws CommonException {
 		// given
-		Usuario expected = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", TipoPerfil.ADMINISTRADOR, "senha-1");
+		Usuario expected = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		repository.save(expected);
@@ -106,7 +106,7 @@ public class UsuarioBusinessTest {
 		altered.setEmail("novo_email@mail.com");
 		altered.setImagem("nova-imagem.jpg");
 		altered.setNome("novo-nome");
-		altered.setPerfil(TipoPerfil.MEMBRO);
+		altered.setPerfil(Perfil.MEMBRO);
 		altered.setSenha("nova-senha");
 
 		repository.save(altered);
@@ -139,11 +139,11 @@ public class UsuarioBusinessTest {
 		assertNotNull("usuario nao encontrado", entity);
 	}
 
-	private void verificarEntity(Long id, String email, String imagem, String nome, TipoPerfil perfil, String senha, Usuario found) {
+	private void verificarEntity(Long id, String email, String imagem, String nome, Perfil perfil, String senha, Usuario found) {
 		verificarEntity(id, email, imagem, nome, perfil, senha, found.getImageList(), found);		
 	}
 
-	private void verificarEntity(Long id, String email, String imagem, String nome, TipoPerfil perfil, String senha, List<UsuarioImage> imageList, Usuario found) {
+	private void verificarEntity(Long id, String email, String imagem, String nome, Perfil perfil, String senha, List<UsuarioImage> imageList, Usuario found) {
 		assertEquals("usuario.id", id, found.getId());
 		assertEquals("usuario.email", email, found.getEmail());
 		assertEquals("usuario.imagem", imagem, found.getImagem());

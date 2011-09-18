@@ -1,6 +1,6 @@
 package br.com.wbotelhos.starting.model.common;
 
-public enum TipoPerfil {
+public enum Perfil {
 
 	MEMBRO("Membro"),
 	MODERADOR("Moderador"),
@@ -8,7 +8,7 @@ public enum TipoPerfil {
 
 	private String label;
 
-	private TipoPerfil(String label) {
+	private Perfil(String label) {
 		this.label = label;
 	}
 

@@ -22,12 +22,12 @@ import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.UsuarioImage;
-import br.com.wbotelhos.starting.model.common.TipoPerfil;
+import br.com.wbotelhos.starting.model.common.Perfil;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 import br.com.wbotelhos.starting.util.Image;
 
 @Resource
-@Permission({ TipoPerfil.MEMBRO, TipoPerfil.MODERADOR, TipoPerfil.ADMINISTRADOR })
+@Permission({ Perfil.MEMBRO, Perfil.MODERADOR, Perfil.ADMINISTRADOR })
 public class UsuarioController {
 
 	private final Result result;
@@ -60,13 +60,13 @@ public class UsuarioController {
 	@Get("/usuario/criar")
 	public void criar(Usuario entity) {
 		result
-		.include("perfilList", TipoPerfil.values())
+		.include("perfilList", Perfil.values())
 		.include("entity", entity);
 	}
 
 	@Get("/usuario/{entity.id}/editar")
 	public void editar(Usuario entity) {
-		result.include("perfilList", TipoPerfil.values());
+		result.include("perfilList", Perfil.values());
 
 		if (entity.getEmail() == null) {
 			result.include("entity", repository.loadById(entity.getId()));

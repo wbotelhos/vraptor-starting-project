@@ -5,7 +5,7 @@ import java.util.List;
 
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.UsuarioImage;
-import br.com.wbotelhos.starting.model.common.TipoPerfil;
+import br.com.wbotelhos.starting.model.common.Perfil;
 
 public class Given {
 
@@ -20,13 +20,13 @@ public class Given {
 	 * @param List[UsuarioImage] * Criada dinamicamente com o ID passado.
 	 * @return Usuario
 	 */
-	public static Usuario usuario(Long id, String email, String nome, String imagem, TipoPerfil perfil, String senha) {
+	public static Usuario usuario(Long id, String email, String nome, String imagem, Perfil perfil, String senha) {
 		List<UsuarioImage> imageList = Given.imageList(id, "descricao-1", "imagem-1.jpg", "titulo-1");
 
 		return usuario(id, email, nome, imagem, perfil, senha, imageList);
 	}
 
-	public static Usuario usuario(Long id, String email, String nome, String imagem, TipoPerfil perfil, String senha, List<UsuarioImage> imageList) {
+	public static Usuario usuario(Long id, String email, String nome, String imagem, Perfil perfil, String senha, List<UsuarioImage> imageList) {
 		Usuario usuario = new Usuario();
 
 		usuario.setId(id);

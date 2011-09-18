@@ -14,7 +14,7 @@ import org.hibernate.validator.NotEmpty;
 import org.hibernate.validator.NotNull;
 
 import br.com.wbotelhos.starting.model.common.AbstractImage;
-import br.com.wbotelhos.starting.model.common.TipoPerfil;
+import br.com.wbotelhos.starting.model.common.Perfil;
 
 @Entity
 public class Usuario extends AbstractImage {
@@ -39,7 +39,7 @@ public class Usuario extends AbstractImage {
 	@NotNull
 	@Column(length = 13)
 	@Enumerated(EnumType.STRING)
-	private TipoPerfil perfil;
+	private Perfil perfil;
 
 	@OneToMany(mappedBy = "usuario", cascade = CascadeType.REMOVE)
 	private List<UsuarioImage> imageList;
@@ -68,11 +68,11 @@ public class Usuario extends AbstractImage {
 		this.senha = senha;
 	}
 
-	public TipoPerfil getPerfil() {
+	public Perfil getPerfil() {
 		return perfil;
 	}
 
-	public void setPerfil(TipoPerfil perfil) {
+	public void setPerfil(Perfil perfil) {
 		this.perfil = perfil;
 	}
 
