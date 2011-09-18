@@ -60,7 +60,7 @@
 			$.ajaxSetup({
 				type: 'get',
 				dataType: 'json',
-				contentType: 'application/json; charset=utf-8',
+				scriptCharset: 'utf-8',
 				error: function(xhr, status, error) {
 					mensagem('<fmt:message key="erro"/>', getError(xhr));
 				}
