@@ -39,7 +39,7 @@ public class UsuarioBusinessTest {
 
 	@Before
 	public void setup() {
-		helper.clean().insert();
+		helper.cleanAndInsert();
 
 		EntityManager manager = JPAHelper.currentEntityManager();
 
