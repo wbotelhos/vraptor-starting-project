@@ -2,6 +2,6 @@
 
 <dataset>
 	<UsuarioImage id="1" descricao="descricao-1" imagem="imagem-1.jpg" titulo="titulo-1" usuario_id="1" />
-	<UsuarioImage id="2" descricao="descricao-2" imagem="imagem-1.jpg" titulo="titulo-2" usuario_id="2" />
-	<UsuarioImage id="3" descricao="descricao-3" imagem="imagem-1.jpg" titulo="titulo-3" usuario_id="3" />
+	<UsuarioImage id="2" descricao="descricao-2" imagem="imagem-1.jpg" titulo="titulo-2" usuario_id="1" />
+	<UsuarioImage id="3" descricao="descricao-3" imagem="imagem-1.jpg" titulo="titulo-3" usuario_id="1" />
 </dataset>

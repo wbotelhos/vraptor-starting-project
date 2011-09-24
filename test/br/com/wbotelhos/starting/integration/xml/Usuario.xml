@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <dataset>
-	<Usuario id="1" email="email_1@gmail.com" imagem="imagem-1.jpg" nome="nome-1" perfil="MEMBRO" senha="senha-1" />
-	<Usuario id="2" email="email_2@gmail.com" imagem="imagem-2.jpg" nome="nome-2" perfil="MODERADOR" senha="senha-2" />
-	<Usuario id="3" email="email_3@gmail.com" imagem="imagem-3.jpg" nome="nome-3" perfil="ADMINISTRADOR" senha="senha-3" />
+	<Usuario id="1" email="email-1@mail.com" imagem="imagem-1.jpg" nome="nome-1" perfil="MEMBRO" senha="senha-1" />
+	<Usuario id="2" email="email-2@mail.com" imagem="imagem-2.jpg" nome="nome-2" perfil="MODERADOR" senha="senha-2" />
+	<Usuario id="3" email="email-3@mail.com" imagem="imagem-3.jpg" nome="nome-3" perfil="ADMINISTRADOR" senha="senha-3" />
 </dataset>
