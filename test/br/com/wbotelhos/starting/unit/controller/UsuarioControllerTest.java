@@ -60,7 +60,7 @@ public class UsuarioControllerTest {
 
 		// then
 		verify(repository).save(entity);
-		verify(result).include("message", i18n("usuario.atualizado.sucesso"));
+		verify(result).include("notice", i18n("usuario.atualizado.sucesso"));
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class UsuarioControllerTest {
 
 		// then
 		verify(repository).remove(entity);
-		verify(result).include("message", i18n("usuario.removido.sucesso"));
+		verify(result).include("notice", i18n("usuario.removido.sucesso"));
 	}
 	
 	@Test
@@ -154,7 +154,7 @@ public class UsuarioControllerTest {
 		Assert.assertEquals("default.jpg", entity.getImagem());
 
 		verify(repository).save(entity);
-		verify(result).include("message", i18n("usuario.salvo.sucesso"));
+		verify(result).include("notice", i18n("usuario.salvo.sucesso"));
 	}
 
 	@Test

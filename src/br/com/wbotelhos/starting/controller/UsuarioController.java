@@ -52,7 +52,7 @@ public class UsuarioController {
 
 		try {
 			entity = repository.save(entity);
-			result.include("message", i18n("usuario.atualizado.sucesso")).redirectTo(this).exibir(entity);
+			result.include("notice", i18n("usuario.atualizado.sucesso")).redirectTo(this).exibir(entity);
 		} catch (CommonException e) {
 			result.include("error", i18n(e.getMessage())).redirectTo(this).editar(entity);
 		}
@@ -91,7 +91,7 @@ public class UsuarioController {
 		repository.remove(entity);
 
 		result
-		.include("message", i18n("usuario.removido.sucesso"))
+		.include("notice", i18n("usuario.removido.sucesso"))
 		.redirectTo(this).listagem();
 	}
 
@@ -105,7 +105,7 @@ public class UsuarioController {
 
 			entity = repository.save(entity);
 
-			result.include("message", i18n("usuario.salvo.sucesso")).redirectTo(this).exibir(entity);
+			result.include("notice", i18n("usuario.salvo.sucesso")).redirectTo(this).exibir(entity);
 		} catch (CommonException e) {
 			result.include("error", i18n(e.getMessage())).redirectTo(this).criar(entity);
 		}

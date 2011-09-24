@@ -39,7 +39,7 @@
 				</c:if>
 		
 				<c:if test="${not empty message}">
-					<div id="message" class="message">${message}</div>
+					<div id="notice" class="notice">${message}</div>
 				</c:if>
 
 				<decorator:body/>
