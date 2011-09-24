@@ -17,6 +17,7 @@ import br.com.caelum.vraptor.interceptor.download.InputStreamDownload;
 import br.com.caelum.vraptor.interceptor.multipart.UploadedFile;
 import br.com.caelum.vraptor.validator.Validations;
 import br.com.wbotelhos.starting.annotation.Permission;
+import br.com.wbotelhos.starting.annotation.Public;
 import br.com.wbotelhos.starting.component.UserSession;
 import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.exception.UploadException;
@@ -110,6 +111,7 @@ public class UsuarioController {
 		}
 	}
 
+	@Public
 	@Get("/translate/{language}/{country}")
 	public void translateTo(String language, String country) {
 		try {
