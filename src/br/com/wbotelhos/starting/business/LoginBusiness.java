@@ -19,7 +19,7 @@ public class LoginBusiness implements LoginRepository {
 
 	public Usuario autenticar(String email, String senha) {
 		try {
-			Query query = manager.createQuery("from Usuario where email = :email and senha = :senha");
+			Query query = manager.createQuery("from " + Usuario.class.getName() + " where email = :email and senha = :senha");
 			query.setParameter("email", email);
 			query.setParameter("senha", senha);
 			return (Usuario) query.getSingleResult();
