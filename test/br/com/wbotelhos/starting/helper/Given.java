@@ -1,77 +1,123 @@
 package br.com.wbotelhos.starting.helper;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.model.UsuarioImage;
+import br.com.wbotelhos.starting.model.common.EntityWrapper;
 import br.com.wbotelhos.starting.model.common.Perfil;
 
 public class Given {
 
-	/**
-	 * Cria um usuário com uma lista de imagens contendo apenas um ítem que usa o ID passado.
-	 * @param id
-	 * @param email
-	 * @param nome
-	 * @param imagem
-	 * @param perfil
-	 * @param senha
-	 * @param List[UsuarioImage] * Criada dinamicamente com o ID passado.
-	 * @return Usuario
-	 */
-	public static Usuario usuario(Long id, String email, String nome, String imagem, Perfil perfil, String senha) {
-		List<UsuarioImage> imageList = Given.imageList(id, "descricao-1", "imagem-1.jpg", "titulo-1");
+	/** Usuario **/
+	public static Usuario usuario(Long id, String email, String imagem, String nome, Perfil perfil, String senha) {
+		Usuario entity = new Usuario();
 
-		return usuario(id, email, nome, imagem, perfil, senha, imageList);
+		entity.setId(id);
+		entity.setEmail(email);
+		entity.setImagem(imagem);
+		entity.setNome(nome);
+		entity.setPerfil(perfil);
+		entity.setSenha(senha);
+
+		return entity;
 	}
 
-	public static Usuario usuario(Long id, String email, String nome, String imagem, Perfil perfil, String senha, List<UsuarioImage> imageList) {
-		Usuario usuario = new Usuario();
+	public static Usuario usuario(Long id) {
+		id = ((id == null) ? 4l : id); // null == nova entidade. no xml ha 3, o proximo eh 4. 
 
-		usuario.setId(id);
-		usuario.setEmail(email);
-		usuario.setImagem(imagem);
-		usuario.setNome(nome);
-		usuario.setPerfil(perfil);
-		usuario.setSenha(senha);
+		String email	= "email-" + id + "@mail.com";
+		String imagem	= "imagem-" + id + ".jpg";
+		String nome		= "nome-" + id;
 
-		usuario.setImageList(imageList);
+		Perfil[] perfilList = Perfil.values();
+		int index = 0;
 
-		return usuario;
+		if (id != null) {
+			index = ((id.intValue() > perfilList.length) ? perfilList.length : id.intValue()) - 1;
+		}
+
+		Perfil perfil	= perfilList[index];
+		String senha	= "senha-" + id;
+
+		return Given.usuario(((id.intValue() == 4) ? null : id), email, imagem, nome, perfil, senha);
 	}
 
-	/**
-	 * Cria uma lista de imagens do usuário já com o usuário relacionado usando o ID passado.
-	 * @param id
-	 * @param descricao
-	 * @param imagem
-	 * @param titulo
-	 * @param [usuario] * Criado dinamicamente com o ID passado.
-	 * @return List<UsuarioImage>
-	 */
-	public static List<UsuarioImage> imageList(Long id, String descricao, String imagem, String titulo) {
-		Usuario usuario = new Usuario();
-		usuario.setId(id);
+	public static Collection<Usuario> usuarioList(Long... ids) {
+		Collection<Usuario> entityList = new ArrayList<Usuario>();
 
-		return imageList(id, descricao, imagem, titulo, usuario);
-		
+		for (Long id : ids) {
+			entityList.add(usuario(id));
+		}
+
+		return entityList;
 	}
 
-	public static List<UsuarioImage> imageList(Long id, String descricao, String imagem, String titulo, Usuario usuario) {
-		List<UsuarioImage> imageList = new ArrayList<UsuarioImage>();
+	public static String usuarioAsJSON(Long id) {
+	    return Serializer.serialize(usuario(id));
+	}
 
-		UsuarioImage usuarioImage = new UsuarioImage();
-		usuarioImage.setId(id);
-		usuarioImage.setDescricao(descricao);
-		usuarioImage.setImagem(imagem);
-		usuarioImage.setTitulo(titulo);
+	public static String usuarioListAsJSON(Long...ids) {
+	    return Serializer.serialize(usuarioList(ids));
+	}
 
-		usuarioImage.setUsuario(usuario);
+	public static String usuarioGridyListAsJSON(Long... ids) {
+	    Collection<Usuario> entityList = usuarioList(ids);
 
-		imageList.add(usuarioImage);
+	    EntityWrapper<Usuario> wrapper = new EntityWrapper<Usuario>();
+		wrapper.setEntityList(entityList);
+		wrapper.setTotal(entityList.size());
 
-		return imageList;
+	    return Serializer.serialize(wrapper);
+	}
+
+	/** UsuarioImage **/
+	public static UsuarioImage usuarioImage(Long id, String descricao, String imagem, String titulo) {
+		UsuarioImage entity = new UsuarioImage();
+
+		entity.setId(id);
+		entity.setDescricao(descricao);
+		entity.setImagem(imagem);
+		entity.setTitulo(titulo);
+
+		return entity;
+	}
+
+	public static UsuarioImage usuarioImage(Long usuarioId, Long id) {
+		id = ((id == null) ? 4l : id); // null == nova entidade. no xml ha 3, o proximo eh 4.
+
+		String descricao	= "descricao-" + id;
+		String imagem		= "imagem-" + id + ".jpg";
+		String titulo		= "titulo-" + id;
+
+		UsuarioImage entity = Given.usuarioImage(((id.intValue() == 4) ? null : id), descricao, imagem, titulo);
+
+		// usuario_id
+		if (usuarioId != null) {
+			entity.setUsuario(Given.usuario(usuarioId));
+		}
+
+		return entity;
+	}
+
+	public static List<UsuarioImage> usuarioImageList(Long usuarioId, Long... ids) {
+		List<UsuarioImage> entityList = new ArrayList<UsuarioImage>();
+
+		for (Long id : ids) {
+			entityList.add(usuarioImage(usuarioId, id));
+		}
+
+		return entityList;
+	}
+
+	public static String usuarioImageAsJSON(Long usuarioId, Long id) {
+	    return Serializer.serialize(usuarioImage(usuarioId, id));
+	}
+
+	public static String usuarioImageListAsJSON(Long usuarioId, Long...ids) {
+	    return Serializer.serialize(usuarioImageList(usuarioId, ids));
 	}
 
 }
