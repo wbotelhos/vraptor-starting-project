@@ -11,7 +11,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.jstryker.database.DBUnitHelper;
 import org.jstryker.database.JPAHelper;
 import org.junit.After;
 import org.junit.Before;
@@ -27,8 +26,7 @@ import br.com.wbotelhos.starting.repository.UsuarioRepository;
 
 public class UsuarioBusinessTest {
 
-	private DBUnitHelper dbUnitHelper = new DBUnitHelper();
-	private Helper helper = new Helper(dbUnitHelper);
+	private final Helper helper = new Helper();
 
 	private UsuarioRepository repository;
 

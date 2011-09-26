@@ -7,11 +7,7 @@ public class Helper {
 	private static final String PACKAGE = "/br/com/wbotelhos/starting/integration/xml/";
 	private static final String[] DATASETS = { "Usuario", "UsuarioImage" };
 
-	private final DBUnitHelper dbUnitHelper;
-
-	public Helper(DBUnitHelper dbUnitHelper) {
-		this.dbUnitHelper = dbUnitHelper;
-	}
+	private final DBUnitHelper dbUnitHelper = new DBUnitHelper();
 
 	public Helper cleanAndInsert(String... datasets) {
 		return clean(datasets).insert(datasets);
