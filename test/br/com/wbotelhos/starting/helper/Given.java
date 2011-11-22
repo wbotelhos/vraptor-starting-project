@@ -26,23 +26,19 @@ public class Given {
 	}
 
 	public static Usuario usuario(Long id) {
-		id = ((id == null) ? 4l : id); // null == nova entidade. no xml ha 3, o proximo eh 4. 
+		int token = getToken(id); 
 
-		String email	= "email-" + id + "@mail.com";
-		String imagem	= "imagem-" + id + ".jpg";
-		String nome		= "nome-" + id;
+		String email	= "email-" + token + "@mail.com";
+		String imagem	= "imagem-" + token + ".jpg";
+		String nome		= "nome-" + token;
 
 		Perfil[] perfilList = Perfil.values();
-		int index = 0;
-
-		if (id != null) {
-			index = ((id.intValue() > perfilList.length) ? perfilList.length : id.intValue()) - 1;
-		}
+		int index = ((token > perfilList.length) ? perfilList.length : token) - 1;
 
 		Perfil perfil	= perfilList[index];
-		String senha	= "senha-" + id;
+		String senha	= "senha-" + token;
 
-		return Given.usuario(((id.intValue() == 4) ? null : id), email, imagem, nome, perfil, senha);
+		return Given.usuario(id, email, imagem, nome, perfil, senha);
 	}
 
 	public static Collection<Usuario> usuarioList(Long... ids) {
@@ -86,13 +82,13 @@ public class Given {
 	}
 
 	public static UsuarioImage usuarioImage(Long usuarioId, Long id) {
-		id = ((id == null) ? 4l : id); // null == nova entidade. no xml ha 3, o proximo eh 4.
+		int token = getToken(id);
 
-		String descricao	= "descricao-" + id;
-		String imagem		= "imagem-" + id + ".jpg";
-		String titulo		= "titulo-" + id;
+		String descricao	= "descricao-" + token;
+		String imagem		= "imagem-" + token + ".jpg";
+		String titulo		= "titulo-" + token;
 
-		UsuarioImage entity = Given.usuarioImage(((id.intValue() == 4) ? null : id), descricao, imagem, titulo);
+		UsuarioImage entity = Given.usuarioImage(id, descricao, imagem, titulo);
 
 		// usuario_id
 		if (usuarioId != null) {
@@ -118,6 +114,21 @@ public class Given {
 
 	public static String usuarioImageListAsJSON(Long usuarioId, Long...ids) {
 	    return Serializer.serialize(usuarioImageList(usuarioId, ids));
+	}
+
+	/** Utils **/
+	public static Long[] array(Long... ids) {
+		Long[] array = new Long[ids.length];
+
+		for (int i = 0; i < ids.length; i++) {
+			array[i] = ids[i];
+		}
+
+		return array;
+	}
+
+	private static int getToken(Long id) {
+		return (id == null) ? 4 : id.intValue();
 	}
 
 }
