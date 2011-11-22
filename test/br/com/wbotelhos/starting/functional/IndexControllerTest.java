@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.unit.controller;
+package br.com.wbotelhos.starting.functional;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;

@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.unit.util;
+package br.com.wbotelhos.starting.unit;
 
 import static org.junit.Assert.assertEquals;
 

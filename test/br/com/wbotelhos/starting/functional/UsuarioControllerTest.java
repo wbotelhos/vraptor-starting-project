@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.unit.controller;
+package br.com.wbotelhos.starting.functional;
 
 import static br.com.wbotelhos.starting.util.Utils.i18n;
 import static org.junit.Assert.assertEquals;

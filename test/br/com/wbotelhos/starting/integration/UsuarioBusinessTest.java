@@ -1,4 +1,4 @@
-package br.com.wbotelhos.starting.integration.business;
+package br.com.wbotelhos.starting.integration;
 
 import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -9,9 +9,6 @@ import static org.junit.Assert.fail;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
-
-import org.jstryker.database.JPAHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -20,13 +17,15 @@ import org.junit.Test;
 import br.com.wbotelhos.starting.business.UsuarioBusiness;
 import br.com.wbotelhos.starting.exception.CommonException;
 import br.com.wbotelhos.starting.helper.Given;
-import br.com.wbotelhos.starting.helper.Helper;
 import br.com.wbotelhos.starting.model.Usuario;
 import br.com.wbotelhos.starting.repository.UsuarioRepository;
 
+import com.jintegrity.core.JIntegrity;
+import com.jintegrity.helper.JPAHelper;
+
 public class UsuarioBusinessTest {
 
-	private final Helper helper = new Helper();
+	private final JIntegrity helper = new JIntegrity();
 
 	private UsuarioRepository repository;
 
@@ -38,10 +37,7 @@ public class UsuarioBusinessTest {
 	@Before
 	public void setup() {
 		helper.cleanAndInsert();
-
-		EntityManager manager = JPAHelper.currentEntityManager();
-
-		repository = new UsuarioBusiness(manager);
+		repository = new UsuarioBusiness(JPAHelper.currentEntityManager());
 	}
 
 	@After
