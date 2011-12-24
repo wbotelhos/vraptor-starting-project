@@ -30,8 +30,7 @@ public class CustomJSONSerialization extends XStreamJSONSerialization {
 		xstream.registerConverter(new CollectionConverter(xstream.getMapper()) {
 
 			@Override
-			@SuppressWarnings("rawtypes")
-			public boolean canConvert(Class type) {
+			public boolean canConvert(@SuppressWarnings("rawtypes") Class type) {
 				return Collection.class.isAssignableFrom(type) || List.class.isAssignableFrom(type) || ArrayList.class.isAssignableFrom(type);
 			}
 		});
