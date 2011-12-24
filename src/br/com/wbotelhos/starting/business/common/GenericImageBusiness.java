@@ -33,7 +33,7 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 				throw new CommonException("erro.apagar.imagem");
 			}
 
-			entity.setImagem("default.jpg");
+			entity.setImageName("default.jpg");
 
 			this.updateImage(entity);
 		}
@@ -44,24 +44,26 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 	}
 
 	public void updateImage(T entity) {
-		Query query = manager.createQuery("update " + entity.getClass().getName() + " set imagem = :imagem where id = :id");
-		query.setParameter("imagem", entity.getImagem());
+		Query query = manager.createQuery("update " + entity.getClass().getName() + " set imageName = :imageName where id = :id");
+		query.setParameter("imageName", entity.getImageName());
 		query.setParameter("id", entity.getId());
 		query.executeUpdate();
 	}
 
 	public void uploadImage(T entity, UploadedFile uploadedFile) throws UploadException {
+		if (!Image.isValidFile(uploadedFile.getFileName())) {
+			throw new UploadException("imagem.invalida");
+		}
+
 		String extension = Image.getExtension(uploadedFile.getFileName());
 
-		entity.setImagem(entity.getId() + extension);
+		entity.setImageName(entity.getId() + extension);
 
 		File folder = new File(entity.getImageFolderPath());
 
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
+		checkFolders(folder);
 
-		File file = new File(folder, entity.getImagem());
+		File file = new File(folder, entity.getImageName());
 
 		try {
 			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
@@ -81,15 +83,13 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 	public void uploadGallery(T entity, I entityImage, UploadedFile uploadedFile) throws UploadException {
 		String extension = Image.getExtension(uploadedFile.getFileName());
 
-		entityImage.setImagem(System.currentTimeMillis() + extension);
+		entityImage.setImageName(System.currentTimeMillis() + extension);
 
 		File folder = new File(entity.getImageFolderPath(), entity.getId().toString());
 
-		if (!folder.exists()) {
-			folder.mkdirs();
-		}
+		checkFolders(folder);
 
-		File file = new File(folder, entityImage.getImagem());
+		File file = new File(folder, entityImage.getImageName());
 
 		try {
 			IOUtils.copy(uploadedFile.getFile(), new FileOutputStream(file));
@@ -106,4 +106,16 @@ public abstract class GenericImageBusiness<T extends AbstractImage, I extends Ab
 		this.save(entityImage);
 	}
 
+	private void checkFolders(File folder) {
+		if (!folder.exists()) {
+			folder.mkdirs();
+		}
+
+		File thumbFolder = new File(folder, "thumb");
+
+		if (!thumbFolder.exists()) {
+			thumbFolder.mkdirs();
+		}
+	}
+	
 }

@@ -12,12 +12,12 @@ import br.com.wbotelhos.starting.model.common.Perfil;
 public class Given {
 
 	/** Usuario **/
-	public static Usuario usuario(Long id, String email, String imagem, String nome, Perfil perfil, String senha) {
+	public static Usuario usuario(Long id, String email, String imageName, String nome, Perfil perfil, String senha) {
 		Usuario entity = new Usuario();
 
 		entity.setId(id);
 		entity.setEmail(email);
-		entity.setImagem(imagem);
+		entity.setImageName(imageName);
 		entity.setNome(nome);
 		entity.setPerfil(perfil);
 		entity.setSenha(senha);
@@ -28,9 +28,9 @@ public class Given {
 	public static Usuario usuario(Long id) {
 		int token = getToken(id); 
 
-		String email	= "email-" + token + "@mail.com";
-		String imagem	= "imagem-" + token + ".jpg";
-		String nome		= "nome-" + token;
+		String email		= "email-" + token + "@mail.com";
+		String imageName	= token + ".jpg";
+		String nome			= "nome-" + token;
 
 		Perfil[] perfilList = Perfil.values();
 		int index = ((token > perfilList.length) ? perfilList.length : token) - 1;
@@ -38,7 +38,7 @@ public class Given {
 		Perfil perfil	= perfilList[index];
 		String senha	= "senha-" + token;
 
-		return Given.usuario(id, email, imagem, nome, perfil, senha);
+		return Given.usuario(id, email, imageName, nome, perfil, senha);
 	}
 
 	public static Collection<Usuario> usuarioList(Long... ids) {
@@ -70,12 +70,12 @@ public class Given {
 	}
 
 	/** UsuarioImage **/
-	public static UsuarioImage usuarioImage(Long id, String descricao, String imagem, String titulo) {
+	public static UsuarioImage usuarioImage(Long id, String descricao, String imageName, String titulo) {
 		UsuarioImage entity = new UsuarioImage();
 
 		entity.setId(id);
 		entity.setDescricao(descricao);
-		entity.setImagem(imagem);
+		entity.setImageName(imageName);
 		entity.setTitulo(titulo);
 
 		return entity;
@@ -85,7 +85,7 @@ public class Given {
 		int token = getToken(id);
 
 		String descricao	= "descricao-" + token;
-		String imagem		= "imagem-" + token + ".jpg";
+		String imagem		= token + ".jpg";
 		String titulo		= "titulo-" + token;
 
 		UsuarioImage entity = Given.usuarioImage(id, descricao, imagem, titulo);

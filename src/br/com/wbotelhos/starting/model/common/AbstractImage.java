@@ -24,89 +24,88 @@ public abstract class AbstractImage extends AbstractEntity {
 	private static final String IMAGE_DEFAULT = "default.jpg"; 
 	private static final String IMAGE_NOT_FOUND = "not-found.png";
 	private static final String THUMB_FOLDER = "thumb";
-	public static final String IMAGE_PATH = System.getProperty("user.home") + File.separator + "startig" + File.separator + "img";
+	public static final String IMAGE_PATH = System.getProperty("user.home") + File.separator + "starting" + File.separator + "img";
 
-	private String imagem;
+	private String imageName;
 
-	public String getImagem() {
-		return imagem;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public abstract String getFolderName();
 
 	/** IMAGE **/
 	public String getImageFolderPath() {																	// filme
-		return IMAGE_PATH + File.separator + this.getFolderName();
+		return IMAGE_PATH + File.separator + getFolderName();
 	}
 
 	public String getImagePath() {																			// filme/1.jpg
-		return this.getImageFolderPath() + File.separator + this.getImagem();
+		return getImageFolderPath() + File.separator + getImageName();
 	}
 
 	public InputStreamDownload getImage() {																	// File(filme/1.jpg)
-		return this.getStream(this.getImagePath());
+		return getStream(getImagePath());
 	}
 
 	/* thumb */
 	public String getThumbFolderPath() {																	// filme/thumb
-		return this.getImageFolderPath() + File.separator + THUMB_FOLDER;
+		return getImageFolderPath() + File.separator + THUMB_FOLDER;
 	}
 	
 	public String getThumbPath() {																			// filme/thumb/1.jpg
-		return this.getThumbFolderPath() + File.separator + this.getImagem();
+		return getThumbFolderPath() + File.separator + getImageName();
 	}
 
-
 	public InputStreamDownload getThumb() {																	// File(filme/thumb/1.jpg)
-		return this.getStream(this.getThumbPath());
+		return getStream(getThumbPath());
 	}
 
 	/** GALLERY **/
 	public String getImageGalleryFolderPath() {																// filme/1
-		return this.getImageFolderPath() + File.separator + this.getId();
+		return getImageFolderPath() + File.separator + getId();
 	}
 
 	public String getImageGalleryPath(String fileName) {													// filme/1/1.jpg
-		return this.getImageGalleryFolderPath() + File.separator + fileName;
+		return getImageGalleryFolderPath() + File.separator + fileName;
 	}
 
 	public InputStreamDownload getImageGallery(String fileName) {											// File(filme/1/1.jpg)
-		return this.getStream(this.getImageGalleryFolderPath() + File.separator + fileName);
+		return getStream(getImageGalleryFolderPath() + File.separator + fileName);
 	}
 
 	/* thumb */
 	public String getThumbGalleryFolderPath() {																// filme/thumb/1
-		return this.getImageFolderPath() + File.separator + THUMB_FOLDER + File.separator + this.getId();
+		return getImageFolderPath() + File.separator + THUMB_FOLDER + File.separator + getId();
 	}
 
 	public String getThumbGalleryPath(String fileName) {													// filme/thumb/1/1.jpg
-		return this.getThumbGalleryFolderPath() + File.separator + fileName;
+		return getThumbGalleryFolderPath() + File.separator + fileName;
 	}
 
 	public InputStreamDownload getThumbGallery(String fileName) {											// File(filme/thumb/1/1.jpg)
-		return this.getStream(this.getThumbGalleryFolderPath() + File.separator + fileName);
+		return getStream(getThumbGalleryFolderPath() + File.separator + fileName);
 	}
 
 	/* default image */
 	public InputStreamDownload getDefaultImage() {
-		return this.getStream(this.getImageFolderPath() + File.separator + IMAGE_DEFAULT);
+		return getStream(getImageFolderPath() + File.separator + IMAGE_DEFAULT);
 	}
 
 	public boolean hasDefaultImage() {
-		return this.getImagem().equalsIgnoreCase(IMAGE_DEFAULT);
+		return getImageName().equalsIgnoreCase(IMAGE_DEFAULT);
 	}
 
 	/* default image */
 	protected String getDownloadFileName() {
-		return (this.getImagem() == null) ? null : this.getImagem().substring(0, this.getImagem().indexOf("."));
+		return (getImageName() == null) ? null : getImageName().substring(0, getImageName().indexOf("."));
 	}
 
 	private String getDownloadFileName(File file) {
-		String fileName = this.getDownloadFileName();
+		String fileName = getDownloadFileName();
 
 		return (fileName == null) ? "default.jpg" : fileName;
 	}
@@ -116,17 +115,17 @@ public abstract class AbstractImage extends AbstractEntity {
 
 		if (!file.exists()) {
 			if (file.getName().endsWith(IMAGE_DEFAULT)) {
-				return this.getNotFoundImage();
+				return getNotFoundImage();
 			}
 
-			return this.getDefaultImage();
+			return getDefaultImage();
 		}
 
 		try {
-			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", this.getDownloadFileName(file), false, file.length());
+			return new InputStreamDownload(new FileInputStream(file), "image/jpeg", getDownloadFileName(file), false, file.length());
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
-			return this.getNotFoundImage();
+			return getNotFoundImage();
 		}
 	}
 
@@ -178,7 +177,7 @@ public abstract class AbstractImage extends AbstractEntity {
 				} while (imageWidth != width || imageHeight != height);
 			}
 
-			ImageIO.write(image, "jpeg", new File(this.getThumbPath()));
+			ImageIO.write(image, "jpeg", new File(getThumbPath()));
 		} catch (IOException e) {
 			System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()).toString() + "[ERROR] " + e.getMessage());
 		}

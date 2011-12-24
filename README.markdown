@@ -39,8 +39,8 @@ Washington Botelho dos Santos [[Blog](http://wbotelhos.com.br) | [Twitter](http:
 + JPA/Hibernate;
 + jQuery UI;
 + jQuery;
++ jIntegrity;
 + JSP;
-+ JSTryker;
 + Log4j;
 + Minify;
 + Mockito;

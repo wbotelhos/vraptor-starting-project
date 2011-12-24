@@ -5,18 +5,18 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AbstractImageGallery extends AbstractEntity {
 
-	private static final long serialVersionUID = 3910848666317936736L;
+	private static final long serialVersionUID = 5035370118565309661L;
 
-	private String imagem;
+	private String imageName;
 	private String titulo;
 	private String descricao;
 
-	public String getImagem() {
-		return imagem;
+	public String getImageName() {
+		return imageName;
 	}
 
-	public void setImagem(String imagem) {
-		this.imagem = imagem;
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
 	}
 
 	public String getTitulo() {

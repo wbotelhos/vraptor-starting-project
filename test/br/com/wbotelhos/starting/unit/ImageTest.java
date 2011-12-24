@@ -15,7 +15,7 @@ public class ImageTest {
 	@Test
 	public void deveriaRetornarEstensao() throws Exception {
 		// given
-		dadoQueTenhoOArquivo("imagem.jpg");
+		dadoQueTenhoOArquivo("image.jpg");
 
 		// when
 		String extensao = Image.getExtension(fileName);
@@ -27,7 +27,7 @@ public class ImageTest {
 	@Test
 	public void deveriaRetornarEstensaoMinuscula() throws Exception {
 		// given
-		dadoQueTenhoOArquivo("imagem.PNG");
+		dadoQueTenhoOArquivo("image.PNG");
 
 		// when
 		String extensao = Image.getExtension(fileName);
@@ -39,7 +39,7 @@ public class ImageTest {
 	@Test
 	public void deveriaRetornarEstensaoMinusculaResumida() throws Exception {
 		// given
-		dadoQueTenhoOArquivo("imagem.JpEg");
+		dadoQueTenhoOArquivo("image.JpEg");
 
 		// when
 		String extensao = Image.getExtension(fileName);
@@ -51,7 +51,7 @@ public class ImageTest {
 	@Test
 	public void deveriaSerUmaEstensaoValida() throws Exception {
 		// given
-		dadoQueTenhoOArquivo("imagem.JpEg");
+		dadoQueTenhoOArquivo("image.JpEg");
 
 		// when
 		boolean result = Image.isValidFile(fileName);
@@ -63,7 +63,7 @@ public class ImageTest {
 	@Test
 	public void deveriaSerUmaEstensaoInvalida() throws Exception {
 		// given
-		dadoQueTenhoOArquivo("imagem.txt");
+		dadoQueTenhoOArquivo("image.txt");
 
 		// when
 		boolean result = Image.isValidFile(fileName);

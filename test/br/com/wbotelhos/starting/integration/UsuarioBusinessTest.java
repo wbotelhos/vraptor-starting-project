@@ -180,7 +180,7 @@ public class UsuarioBusinessTest {
 
 	private void verifyEntities(Usuario expected, Usuario found) {
 		assertEquals("deve ter o mesmo email", expected.getEmail(), found.getEmail());
-		assertEquals("deve ter a mesmo imagem", expected.getImagem(), found.getImagem());
+		assertEquals("deve ter a mesmo imagem", expected.getImageName(), found.getImageName());
 		assertEquals("deve ter o mesmo nome", expected.getNome(), found.getNome());
 		assertEquals("deve ter o mesmo perfil", expected.getPerfil(), found.getPerfil());
 		assertEquals("deve ter a mesmo senha", expected.getSenha(), found.getSenha());

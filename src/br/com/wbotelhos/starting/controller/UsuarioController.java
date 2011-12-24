@@ -101,7 +101,7 @@ public class UsuarioController {
 		validator.onErrorRedirectTo(this).criar(entity);
 
 		try {
-			entity.setImagem("default.jpg");
+			entity.setImageName("default.jpg");
 
 			entity = repository.save(entity);
 
@@ -126,30 +126,28 @@ public class UsuarioController {
 	}
 
 	@Post("/usuario/{entity.id}/image")
-	public void uploadImage(Usuario entity, final UploadedFile file) {
-		validator.checking(new Validations(localization.getBundle()) {{
-			that(Image.isValidFile(file.getFileName()), i18n("imagem"), "imagem.invalida");
-	    }});
-
-		validator.onErrorUsePageOf(this).exibir(entity);
-
+	public void uploadImage(Usuario entity, UploadedFile file) {
 		try {
 			repository.uploadImage(entity, file);
+
+			result.redirectTo(this).exibir(entity);
 		} catch (UploadException e) {
 			result.include("error", e.getMessage()).forwardTo(this).exibir(entity);
 		}
-
-		result.redirectTo(this).exibir(entity);
 	}
 
 	@Get("/usuario/{entity.id}/thumb")
 	public InputStreamDownload viewThumb(Usuario entity) {
-		return repository.loadById(entity.getId()).getThumb();
+		Usuario usuario = repository.loadById(entity.getId());
+
+		return (usuario == null) ? entity.getNotFoundImage() : usuario.getThumb();
 	}
 
 	@Get("/usuario/{entity.id}/image")
 	public InputStreamDownload viewImage(Usuario entity) {
-		return repository.loadById(entity.getId()).getImage();
+		Usuario usuario = repository.loadById(entity.getId());
+
+		return (usuario == null) ? entity.getNotFoundImage() : usuario.getImage();
 	}
 
 	@Get("/usuario/{entity.id}/gallery/{fileName}/thumb")

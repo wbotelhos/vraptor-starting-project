@@ -53,7 +53,7 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaAtualizar() throws Exception {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.atualizar(entity);
@@ -66,7 +66,7 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaCriar() {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.criar(entity);
@@ -79,7 +79,7 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaChamarFormularioDeEdicaoSemBuscarNoBanco() {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.editar(entity);
@@ -107,7 +107,7 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaExibir() {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.exibir(entity);
@@ -132,7 +132,7 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaRemover() {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.remover(entity);
@@ -145,13 +145,13 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaSalvar() throws Exception {
 		// given
-		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "imagem-1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
+		Usuario entity = Given.usuario(ID_VALIDO, "email_1@email.com", "1.jpg", "nome-1", Perfil.ADMINISTRADOR, "senha-1");
 
 		// when
 		controller.salvar(entity);
 
 		// then
-		Assert.assertEquals("default.jpg", entity.getImagem());
+		Assert.assertEquals("default.jpg", entity.getImageName());
 
 		verify(repository).save(entity);
 		verify(result).include("notice", i18n("usuario.salvo.sucesso"));
