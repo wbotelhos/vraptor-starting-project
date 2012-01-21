@@ -113,7 +113,7 @@
 	<target name="compile" depends="rename">
 		<echo>Compiling classes...</echo>
 		<javac destdir="${target.classes.dir}" srcdir="${src.dir}" debug="true"
-				debuglevel="vars,lines,source" source="1.6" target="1.6">
+				debuglevel="vars,lines,source" source="1.6" target="1.6" encoding="UTF-8">
 			<classpath>
 				<path refid="lib.path" />
 				<path refid="build.path" />
@@ -122,7 +122,7 @@
 
 		<echo>Compiling test classes...</echo>
 		<javac destdir="${target.test.dir}" srcdir="${test.dir}" debug="true"
-				debuglevel="vars,lines,source" source="1.6" target="1.6">
+				debuglevel="vars,lines,source" source="1.6" target="1.6" encoding="UTF-8">
 			<classpath>
 				<path refid="lib.path" />
 				<path refid="build.path" />
