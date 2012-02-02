@@ -9,6 +9,18 @@ import java.util.ResourceBundle;
 
 public class Utils {
 
+	public static String decoderText(String text) {
+		try {
+			byte[] bytes = text.getBytes("ISO-8859-1");
+			text = new String(bytes, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+			return text;
+		}
+
+		return text;
+	}
+
 	public static String encrypt(String text) {
 		try {
 			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");

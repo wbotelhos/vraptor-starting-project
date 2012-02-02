@@ -8,22 +8,28 @@ import br.com.wbotelhos.starting.util.Utils;
 
 public class UtilsTest {
 
-	private String key;
-
 	@Test
 	public void deveriaNaoAcharI18N() {
 		// given
-		dadoQueTenhoAKey("key.inexistente");
+		String key = "Ã§Ã¢Ã§Ã­sÃ£Ã²";
 
 		// when
-		String value = Utils.i18n(key);
+		String actual = Utils.i18n(key);
 
 		// then
-		assertEquals("???key.inexistente???", value);
+		assertEquals("???key.inexistente???", actual);
 	}
 
-	private void dadoQueTenhoAKey(String key) {
-		this.key = key;
+	@Test
+	public void deveriaDecodificarCaracteres() {
+		// given
+		String text = "Ã§Ã¢Ã§Ã­sÃ£Ã²";
+
+		// when
+		text = Utils.decoderText(text);
+
+		// then
+		assertEquals("çâçísãò", text);
 	}
 
 }
