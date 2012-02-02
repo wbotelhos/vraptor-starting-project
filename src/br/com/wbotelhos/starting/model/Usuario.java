@@ -84,7 +84,6 @@ public class Usuario extends AbstractImage {
 		this.imageList = imageList;
 	}
 
-	@Override
 	public String getFolderName() {
 		return "usuario";
 	}
