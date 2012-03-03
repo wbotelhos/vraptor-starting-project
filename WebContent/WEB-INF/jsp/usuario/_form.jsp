@@ -1,5 +1,5 @@
 <head>
-	<title>VRaptor | Usu&aacute;rio [novo]</title>
+	<title>Loto Status | Signup</title>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
 					    </c:forEach>
 					</select><br/><br/>
 
-			<input type="submit" value="salvar"/>
+			<input type="submit" value="salvar" class="btn" />
 		</form>
 	</fieldset>
 </body>

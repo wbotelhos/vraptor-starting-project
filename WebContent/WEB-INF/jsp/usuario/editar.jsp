@@ -3,5 +3,5 @@
 </head>
 
 <body>
-	<%@ include file="form.jsp" %>
+	<%@ include file="_form.jsp" %>
 </body>
