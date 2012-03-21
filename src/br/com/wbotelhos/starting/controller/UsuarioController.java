@@ -83,7 +83,7 @@ public class UsuarioController {
 	
 	@Get("/usuario")
 	public void listagem() {
-		result.include("entityList", repository.loadAll());
+		result.include("entityList", repository.all());
 	}
 
 	@Delete("/usuario/{entity.id}")

@@ -7,7 +7,7 @@ import br.com.wbotelhos.starting.model.common.AbstractEntity;
 
 public interface GenericRepository<T extends AbstractEntity> {
 
-	Collection<T> loadAll();
+	Collection<T> all();
 
 	T loadById(Long id);
 

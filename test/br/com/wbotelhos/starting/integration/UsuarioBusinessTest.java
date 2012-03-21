@@ -51,7 +51,7 @@ public class UsuarioBusinessTest {
 		// given
 
 		// when
-		List<Usuario> entityList = (List<Usuario>) repository.loadAll();
+		List<Usuario> entityList = (List<Usuario>) repository.all();
 
 		// then
 		assertEquals("deve retornar a quantidade correta de registros", 3, entityList.size());
@@ -86,7 +86,7 @@ public class UsuarioBusinessTest {
 		// when
 		Usuario actual = repository.save(entity);
 
-		List<Usuario> actualList = (List<Usuario>) repository.loadAll();
+		List<Usuario> actualList = (List<Usuario>) repository.all();
 
 		// then
 		assertEquals("deve ter um registro a mais", 4, actualList.size());

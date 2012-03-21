@@ -125,7 +125,7 @@ public class UsuarioControllerTest {
 		controller.listagem();
 
 		// then
-		verify(repository).loadAll();
+		verify(repository).all();
 		verify(result).include("entityList", new ArrayList<Usuario>());
 	}
 

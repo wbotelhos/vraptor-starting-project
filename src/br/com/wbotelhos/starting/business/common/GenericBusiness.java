@@ -24,16 +24,16 @@ public abstract class GenericBusiness<T extends AbstractEntity> implements Gener
 		this.clazz = clazz;
 	}
 
-	public Collection<T> loadAll() {
+	public Collection<T> all() {
 		Query query = manager.createQuery("from " + clazz.getName());
 
 		@SuppressWarnings("unchecked")
-		Collection<T> resultList = query.getResultList();
+		Collection<T> list = query.getResultList();
 
-		return resultList;
+		return list;
 	}
 
-	public T loadById(Long id) {
+	public T find(Long id) {
 		return manager.find(clazz, id);
 	}
 
