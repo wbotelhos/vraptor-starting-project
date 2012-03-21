@@ -1,5 +1,5 @@
 <head>
-	<title>Loto Status | Signup</title>
+	<title>VRaptor | Usu&aacute;rio [novo]</title>
 </head>
 
 <body>
