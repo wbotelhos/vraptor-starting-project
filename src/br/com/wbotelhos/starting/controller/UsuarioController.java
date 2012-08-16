@@ -70,7 +70,7 @@ public class UsuarioController {
 		result.include("perfilList", Perfil.values());
 
 		if (entity.getEmail() == null) {
-			result.include("entity", repository.loadById(entity.getId()));
+			result.include("entity", repository.find(entity.getId()));
 		} else {
 			result.include("entity", entity);
 		}
@@ -78,7 +78,7 @@ public class UsuarioController {
 
 	@Get("/usuario/{entity.id}")
 	public void exibir(Usuario entity) {
-		result.include("entity", repository.loadById(entity.getId()));
+		result.include("entity", repository.find(entity.getId()));
 	}
 	
 	@Get("/usuario")
@@ -138,14 +138,14 @@ public class UsuarioController {
 
 	@Get("/usuario/{entity.id}/thumb")
 	public InputStreamDownload viewThumb(Usuario entity) {
-		Usuario usuario = repository.loadById(entity.getId());
+		Usuario usuario = repository.find(entity.getId());
 
 		return (usuario == null) ? entity.getNotFoundImage() : usuario.getThumb();
 	}
 
 	@Get("/usuario/{entity.id}/image")
 	public InputStreamDownload viewImage(Usuario entity) {
-		Usuario usuario = repository.loadById(entity.getId());
+		Usuario usuario = repository.find(entity.getId());
 
 		return (usuario == null) ? entity.getNotFoundImage() : usuario.getImage();
 	}

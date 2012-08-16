@@ -9,7 +9,7 @@ public interface GenericRepository<T extends AbstractEntity> {
 
 	Collection<T> all();
 
-	T loadById(Long id);
+	T find(Long id);
 
 	void remove(T entity);
 
